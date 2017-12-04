@@ -1,0 +1,17 @@
+{
+  "port":"3000",
+  "mongodb": {
+    "url": "mongodb://localhost:27017/darajaAPI"
+  },
+  "auth": {
+    "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+  },
+  "lipaNaMpesa":{
+    "processRequest": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+    "key":"bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
+    "shortCode":"600169",
+    "consumerKey":"H65FlGErvyuFvsajRekG9zcRdnQ30kHO",
+    "consumerSecret":"2ARcZPg7Gc8gWFBd",
+    "callBackURL":"http://localhost:3000/stkpush/callback"
+  }
+}
