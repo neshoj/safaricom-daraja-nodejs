@@ -3,6 +3,8 @@ var express = require('express'),
     moment = require('moment'),
     request = require('request');
 
+//Lipa Na M-pesa model
+var lipaNaMpesa = require('./lipaNaMPesaTnxModel');
 
 var auth = require('../../auth/auth');
 var properties = require('nconf');
@@ -44,7 +46,7 @@ var bootstrapRequest = function (req, res, next) {
         }
         else {
             req.status = false;
-            req.code= '01';
+            req.code = '01';
             req.statusMessage = 'Invalid request received';
         }
         next();
@@ -77,12 +79,12 @@ function postTransaction(req, res, next) {
                     } else {
                         //Failed processing
                         req.status = false;
-                        req.code= body.errorCode;
+                        req.code = body.errorCode;
                         req.statusMessage = body.errorMessage;
                     }
                 } else {
                     req.status = false;
-                    req.code= '01';
+                    req.code = '01';
                     req.statusMessage = error.getMessage();
                 }
                 next();
@@ -96,14 +98,28 @@ function postTransaction(req, res, next) {
 
 function processResponse(req, res, next) {
     if (req.status) {
-        //Prepare response message
+        //Prepare external response message
         req.merchantMsg = {
             status: req.transactionResp.ResponseCode === '0' ? '00' : req.transactionResp.ResponseCode,
             message: req.transactionResp.ResponseDescription,
             merchantRequestId: req.transactionResp.MerchantRequestID,
             checkoutRequestId: req.transactionResp.CheckoutRequestID
         };
-        next();
+        //Prepare persistence object
+        var transaction = new lipaNaMpesa({
+            request: req.body,
+            mpesaInitRequest: req.mpesaTransaction,
+            mpesaInitResponse: req.transactionResp
+        });
+        //Persist transaction object
+        transaction.save(function (err) {
+            if (err) {
+                req.status = false;
+                req.code = '01';
+                req.statusMessage = 'Unable to persist lipa na mpesa transaction';
+            }
+            next();
+        });
     } else {
         //Move along, transaction already failed
         next();
@@ -122,6 +138,22 @@ stkPushRouter.post('/process',
     function (req, res, next) {
         //Check processing status
         res.json(req.status ? req.merchantMsg : {status: '01', message: req.statusMessage});
+    });
+
+/**
+ * Process callback request from safaricom
+ * @param req
+ * @param res
+ * @param next
+ */
+function processCallback(req, res, next) {
+
+}
+
+stkPushRouter.post('/callback',
+    processCallback,
+    function (req, res, next) {
+
     });
 
 module.exports = stkPushRouter;

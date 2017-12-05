@@ -2,7 +2,7 @@ var moment = require('moment');
 var request = require('request');
 const STK_PUSH = 'STK-PUSH', TOKEN_INVALIDITY_WINDOW = 240;
 
-//Mongoose model
+//Authentication model
 var tokenModel = require('./tokenModel');
 var properties = require('nconf');
 
@@ -34,6 +34,7 @@ var fetchToken = function (req, res, next) {
                     }
                 } else {
                     req.status = false;
+                    req.code = '01';
                     next();
                 }
             });
@@ -94,6 +95,7 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                         token.save(function (err) {
                             if (err) {
                                 req.status = false;
+                                req.code='01';
                                 req.statusMessage = 'Unable to save token. Service: ' + serviceName;
                             } else {
                                 req.transactionToken = token.accessToken;
@@ -103,13 +105,13 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                     } else {
                         //Update existing access token
                         var conditions = {service: serviceName},
-                            update,
                             options = {multi: true};
                         //Update existing token
                         tokenModel.update(conditions, update, options,
                             function (err, record) {
                                 if (err) {
                                     req.status = false;
+                                    req.code='01';
                                     req.statusMessage = 'Unable to update token. Service: ' + serviceName;
                                 } else {
                                     if (record) req.transactionToken = update.accessToken;
@@ -119,11 +121,13 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                     }
                 } else {
                     req.status = false;
+                    req.code = tokenResp.errorCode;
                     req.statusMessage = tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing';
                 }
             } else {
                 //Body is empty
                 req.status = false;
+                req.code = '01';
                 req.statusMessage = error.getMessage();
                 next();
             }
