@@ -20,7 +20,7 @@ var fetchToken = function (req, res, next) {
                         //    Record exists : update
                         if (isTokenValid(records)) {
                             console.log('Token is valid: ' + serviceName);
-                            req.token = records.accessToken;
+                            req.transactionToken = records.accessToken;
                             next();
                         } else {
                             console.log('Token is invalid: ' + serviceName);
@@ -45,9 +45,8 @@ var fetchToken = function (req, res, next) {
  * @param service tokenObject
  */
 var isTokenValid = function (service) {
-    var duration = moment.duration(moment(new Date()).diff(service.lastUpdated));
-    var seconds = duration.asSeconds() + TOKEN_INVALIDITY_WINDOW;
-    return (seconds < service.timeout);
+    var tokenAge = moment.duration(moment(new Date()).diff(service.lastUpdated)).asSeconds() + TOKEN_INVALIDITY_WINDOW;
+    return (tokenAge < service.timeout);
 };
 
 /**
@@ -75,47 +74,57 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
     request({url: url, headers: {"Authorization": auth}},
         function (error, response, body) {
             if (!error) {
+
                 //Process successful token response
                 var tokenResp = JSON.parse(body);
-                var update = {
-                    lastUpdated: moment().format('YYYY-MM-DD HH:mm:ss'),
-                    accessToken: tokenResp.access_token,
-                    timeout: tokenResp.expires_in,
-                    service: serviceName
-                };
-                if (newInstance) {
-                    //Create new access token for M-Pesa service
-                    token = new tokenModel(
-                        update
-                    );
-                    //Save new token to database
-                    token.save(function (err) {
-                        if (err) {
-                            req.status = false;
-                        } else {
-                            req.token = token.accessToken;
-                        }
-                        next();
-                    });
-                } else {
-                    //Update existing access token
-                    var conditions = {service: serviceName},
-                        update,
-                        options = {multi: true};
-                    //Update existing token
-                    tokenModel.update(conditions, update, options,
-                        function (err, record) {
+                //Check if response contains error message
+                if (!tokenResp.errorCode) {
+                    var update = {
+                        lastUpdated: moment().format('YYYY-MM-DD HH:mm:ss'),
+                        accessToken: tokenResp.access_token,
+                        timeout: tokenResp.expires_in,
+                        service: serviceName
+                    };
+                    if (newInstance) {
+                        //Create new access token for M-Pesa service
+                        token = new tokenModel(
+                            update
+                        );
+                        //Save service token
+                        token.save(function (err) {
                             if (err) {
                                 req.status = false;
+                                req.statusMessage = 'Unable to save token. Service: ' + serviceName;
                             } else {
-                                if (record) req.token = update.accessToken;
+                                req.transactionToken = token.accessToken;
                             }
                             next();
-                        })
+                        });
+                    } else {
+                        //Update existing access token
+                        var conditions = {service: serviceName},
+                            update,
+                            options = {multi: true};
+                        //Update existing token
+                        tokenModel.update(conditions, update, options,
+                            function (err, record) {
+                                if (err) {
+                                    req.status = false;
+                                    req.statusMessage = 'Unable to update token. Service: ' + serviceName;
+                                } else {
+                                    if (record) req.transactionToken = update.accessToken;
+                                }
+                                next();
+                            })
+                    }
+                } else {
+                    req.status = false;
+                    req.statusMessage = tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing';
                 }
             } else {
                 //Body is empty
                 req.status = false;
+                req.statusMessage = error.getMessage();
                 next();
             }
         });

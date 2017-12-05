@@ -1,6 +1,8 @@
-var express = require('express');
-var stkPushRouter = express.Router();
-var moment = require('moment');
+var express = require('express'),
+    stkPushRouter = express.Router(),
+    moment = require('moment'),
+    request = require('request');
+
 
 var auth = require('../../auth/auth');
 var properties = require('nconf');
@@ -19,10 +21,10 @@ var bootstrapRequest = function (req, res, next) {
          *******************************/
         if (request.amount || request.phoneNumber || request.callBackURL || request.accountReference || request.description) {
             var BusinessShortCode = properties.get('lipaNaMpesa:shortCode');
-            var timeStamp = moment().format('YYYYMMDDHHSS');
+            var timeStamp = moment().format('YYYYMMDDHHmmss');
             console.log('Time stamp: ' + timeStamp);
 
-            req.lipaNaMpesa = {
+            req.mpesaTransaction = {
                 BusinessShortCode: BusinessShortCode,
                 Password: new Buffer(BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp).toString("base64"),
                 Timestamp: timeStamp,
@@ -36,15 +38,77 @@ var bootstrapRequest = function (req, res, next) {
                 TransactionDesc: request.description
             };
 
+            console.log(' POST Req: ' + JSON.stringify(req.mpesaTransaction));
+
             req.status = true;
         }
         else {
             req.status = false;
+            req.code= '01';
+            req.statusMessage = 'Invalid request received';
         }
         next();
     }
 ;
 
+/**
+ * Post transaction to Mpesa
+ */
+function postTransaction(req, res, next) {
+    if (req.status) {
+        var url = properties.get('lipaNaMpesa:processRequest'),
+            auth = "Bearer " + req.transactionToken;
+
+        request(
+            {
+                method: 'POST',
+                url: url,
+                headers: {
+                    "Authorization": auth
+                },
+                json: req.mpesaTransaction
+            },
+            function (error, response, body) {
+                console.log('POST Resp: ' + JSON.stringify(body));
+                if (!error) {
+                    if (!body.errorCode) {
+                        //Successful processing
+                        req.transactionResp = body;
+                    } else {
+                        //Failed processing
+                        req.status = false;
+                        req.code= body.errorCode;
+                        req.statusMessage = body.errorMessage;
+                    }
+                } else {
+                    req.status = false;
+                    req.code= '01';
+                    req.statusMessage = error.getMessage();
+                }
+                next();
+            }
+        )
+    } else {
+        //Move along, transaction already failed
+        next();
+    }
+}
+
+function processResponse(req, res, next) {
+    if (req.status) {
+        //Prepare response message
+        req.merchantMsg = {
+            status: req.transactionResp.ResponseCode === '0' ? '00' : req.transactionResp.ResponseCode,
+            message: req.transactionResp.ResponseDescription,
+            merchantRequestId: req.transactionResp.MerchantRequestID,
+            checkoutRequestId: req.transactionResp.CheckoutRequestID
+        };
+        next();
+    } else {
+        //Move along, transaction already failed
+        next();
+    }
+}
 
 /**
  * Use this API to initiate online payment on behalf of a customer
@@ -53,8 +117,11 @@ var bootstrapRequest = function (req, res, next) {
 stkPushRouter.post('/process',
     bootstrapRequest,
     auth,
+    postTransaction,
+    processResponse,
     function (req, res, next) {
-        res.json({message: 'running authentication API success'});
+        //Check processing status
+        res.json(req.status ? req.merchantMsg : {status: '01', message: req.statusMessage});
     });
 
 module.exports = stkPushRouter;
