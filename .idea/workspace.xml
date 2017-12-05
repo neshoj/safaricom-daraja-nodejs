@@ -21,8 +21,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="85">
-                <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+              <first_editor relative-caret-position="-255">
+                <caret line="48" column="10" lean-forward="false" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -221,7 +221,7 @@
       <workItem from="1512330652439" duration="1032000" />
       <workItem from="1512332269811" duration="1539000" />
       <workItem from="1512362825599" duration="23963000" />
-      <workItem from="1512447311835" duration="10787000" />
+      <workItem from="1512447311835" duration="10866000" />
     </task>
     <task id="LOCAL-00001" summary="Changed readme">
       <created>1512331162958</created>
@@ -265,11 +265,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512455009152</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Revamped readme">
+      <created>1512460875545</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1512460875545</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37321000" />
+    <option name="totallyTimeSpent" value="37400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
@@ -308,7 +315,8 @@
     <MESSAGE value="Updated readme" />
     <MESSAGE value="Working STK-PUSH requests" />
     <MESSAGE value="Saving STK Push transaction to database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving STK Push transaction to database" />
+    <MESSAGE value="Revamped readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revamped readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -530,8 +538,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="85">
-            <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <first_editor relative-caret-position="-255">
+            <caret line="48" column="10" lean-forward="false" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
             <folding />
           </first_editor>
           <second_editor />

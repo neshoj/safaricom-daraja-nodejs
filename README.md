@@ -9,12 +9,12 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
   
   Lipa na M-Pesa Online Payment API is used to initiate a M-Pesa transaction on behalf of a customer using STK Push.
   
-  ######Prerequisite ######
+  ###### Prerequisite ######
   1. MPesa paybill this MUST have been configured for Lipa Na Mpesa Service
   2. Lipa Na Mpesa API key e.g. bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
   3. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) under selected API product Lipa na Mpesa Production.
   
-  ######Initial Request ###### 
+  ###### Initial Request ###### 
   
   This transaction is initiated by your application e.g. ecommerce site 
   
@@ -46,7 +46,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
   
   ```
   
-   ######Callback Request ######
+   ###### Callback Request ######
    
    This transaction is initiated by the mpesa gateway to your application. Transaction will be sent to the enp point you provided in the initial request. May take time to arrive after sending the initial transaction request.
    
