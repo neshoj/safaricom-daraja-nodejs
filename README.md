@@ -3,22 +3,25 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
 **Feature list**
 * [x] Auth Management
-* [x] STK Push
+* [x] STK Push ( Online payment & Query request )
   
   ## STK Push ###
   
   Lipa na M-Pesa Online Payment API is used to initiate a M-Pesa transaction on behalf of a customer using STK Push.
   
-  ###### Prerequisite ######
-  1. MPesa paybill this MUST have been configured for Lipa Na Mpesa Service
+  **Online Payment**
+  
+  ###### Required information ######
+  1. Mpesa pay bill short code. MUST have been configured for Lipa Na Mpesa Service
   2. Lipa Na Mpesa API key e.g. bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
-  3. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) under selected API product Lipa na Mpesa Production.
+  3. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) ensure you check 
+  against Lipa na Mpesa Production under OTP confirmation window when going through the go live steps.
   
   ###### Initial Request ###### 
   
   This transaction is initiated by your application e.g. ecommerce site 
   
-  End point : `http://localhost:3000/stkpush/process`
+  End point : `http://localhost:3000/stkpush/process` change the host information based on where you have deployed the solution
   
   **Sample Request**
   
@@ -42,13 +45,13 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
       "message": "Success. Request accepted for processing",
       "merchantRequestId": "16949-1561111-1",
       "checkoutRequestId": "ws_CO_05122017091747935"
-  }  
-  
+  }    
   ```
   
    ###### Callback Request ######
    
-   This transaction is initiated by the mpesa gateway to your application. Transaction will be sent to the enp point you provided in the initial request. May take time to arrive after sending the initial transaction request.
+   This transaction is initiated by the mpesa gateway to your application. Transaction will be sent to the enp point you
+    provided in the initial request. This request may take time to arrive after sending the initial transaction request.
    
    ```
    {
