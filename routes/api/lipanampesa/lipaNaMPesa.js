@@ -141,7 +141,7 @@ function fetchTransaction(req, res, next) {
         console.log('Initial transaction request found...');
         //Add transaction to req body
         req.lipaNaMPesaTransaction = lipaNaMPesaTransaction;
-        req.status=true;
+        req.status = true;
         next();
     })
 
@@ -176,6 +176,20 @@ function updateTransaction(req, res, next) {
 }
 
 /**
+ * Fetch reference number from Mpesa callback 'Item' array
+ * @param item
+ * @returns {*}
+ */
+function fetchMpesaReferenceNumber(item) {
+    if (item) {
+        if (item.length) {
+            for (var i = 0; i < item.length; i++) if (item[i].Name === 'MpesaReceiptNumber') return item[i].Value;
+        }
+    }
+    return '';
+}
+
+/**
  * Forward request to transaction initiator via callback
  * @param req
  * @param res
@@ -183,7 +197,17 @@ function updateTransaction(req, res, next) {
  */
 function forwardRequestToRemoteClient(req, res, next) {
     console.log('Send request to originator..');
-    next();
+    //Forward request to remote server
+    mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
+        url: req.lipaNaMPesaTransaction.mpesaInitRequest.CallBackURL,
+        transaction: {
+            status: req.lipaNaMPesaTransaction.mpesaCallback.stkCallback.ResultCode === 0 ? '00' : req.lipaNaMPesaTransaction.mpesaCallback.stkCallback.ResultCode,
+            message: req.lipaNaMPesaTransaction.mpesaCallback.stkCallback.ResultDesc,
+            merchantRequestId: req.lipaNaMPesaTransaction.merchantRequestId,
+            checkoutRequestId: req.lipaNaMPesaTransaction.checkoutRequestId,
+            mpesaReference: fetchMpesaReferenceNumber(req.lipaNaMPesaTransaction.mpesaCallback.stkCallback.CallbackMetadata.Item)
+        }
+    }, req, res, next);
 }
 
 stkPushRouter.post('/callback',

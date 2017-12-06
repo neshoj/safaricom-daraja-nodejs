@@ -33,22 +33,61 @@ function sendMpesaTxnToSafaricomAPI(txnDetails, req, res, next) {
             json: txnDetails.transaction
         },
         function (error, response, body) {
-
-            if (!body.fault && !body.errorCode && !error) {
-                console.log('POST Resp: ' + JSON.stringify(body));
-                //Successful processing
-                req.transactionResp = body;
-            } else {
-                console.log('Error occurred: ' + JSON.stringify(body));
-                req = this.handleError(req, (body.fault.faultstring || body.errorMessage || error.getMessage()), (body.errorCode || GENERIC_SERVER_ERROR_CODE));
-            }
-            next();
+            httpResponseBodyProcessor({
+                body: body,
+                error: error
+            }, req, res, next);
         }
     )
+}
+
+/**
+ * Send requests to API initiators
+ * @param txnDetails
+ * @param req
+ * @param res
+ * @param next
+ */
+function sendCallbackMpesaTxnToAPIInitiator(txnDetails, req, res, next) {
+
+    console.log('Requesting: '+ JSON.stringify(txnDetails));
+    request(
+        {
+            method: 'POST',
+            url: txnDetails.url,
+            json: txnDetails.transaction
+        },
+        function (error, response, body) {
+            httpResponseBodyProcessor({
+                body: body,
+                error: error
+            }, req, res, next);
+        }
+    )
+}
+
+/**
+ * Handle Http responses
+ * @param responseData
+ * @param req
+ * @param res
+ * @param next
+ */
+function httpResponseBodyProcessor(responseData, req, res, next) {
+    if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error) {
+        console.log('POST Resp: ' + JSON.stringify(responseData.body));
+        //Successful processing
+        req.transactionResp = responseData.body;
+    } else {
+        console.log('Error occurred: ' + JSON.stringify(body));
+        this.handleError(req, (responseData.body.fault.faultstring || responseData.body.errorMessage || responseData.error.getMessage()), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE));
+    }
+    next();
 }
 
 //Export model
 module.exports = {
     handleError: handleError,
-    sendMpesaTxnToSafaricomAPI: sendMpesaTxnToSafaricomAPI
+    sendMpesaTxnToSafaricomAPI: sendMpesaTxnToSafaricomAPI,
+    sendCallbackMpesaTxnToAPIInitiator: sendCallbackMpesaTxnToAPIInitiator
 };
