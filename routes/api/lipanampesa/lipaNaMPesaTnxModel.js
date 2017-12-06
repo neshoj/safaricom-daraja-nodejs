@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var lipaNaMpesaTransaction = new mongoose.Schema(
+var txnRepository = new mongoose.Schema(
     {
         request: {
             amount: String,
@@ -33,7 +33,7 @@ var lipaNaMpesaTransaction = new mongoose.Schema(
 );
 
 // Create a model based on the schema
-var lipaNaMpesaTransaction = mongoose.model('lipaNaMpesa', lipaNaMpesaTransaction);
+var  lipaNaMpesaTransaction= mongoose.model('lipaNaMpesaTxn', txnRepository);
 
 //Export model
 module.exports = lipaNaMpesaTransaction;

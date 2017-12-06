@@ -1,6 +1,8 @@
 var moment = require('moment');
 var request = require('request');
-const STK_PUSH = 'STK-PUSH', TOKEN_INVALIDITY_WINDOW = 240;
+const STK_PUSH = 'STK-PUSH',
+    TOKEN_INVALIDITY_WINDOW = 240,
+    GENERIC_SERVER_ERROR_CODE = '01';
 
 //Authentication model
 var tokenModel = require('./tokenModel');
@@ -19,7 +21,7 @@ var fetchToken = function (req, res, next) {
                     if (records) {
                         //    Record exists : update
                         if (isTokenValid(records)) {
-                            console.log('Token is valid: ' + serviceName);
+                            console.log('Token is still valid: ' + serviceName);
                             req.transactionToken = records.accessToken;
                             next();
                         } else {
@@ -34,7 +36,7 @@ var fetchToken = function (req, res, next) {
                     }
                 } else {
                     req.status = false;
-                    req.code = '01';
+                    req.code = GENERIC_SERVER_ERROR_CODE;
                     next();
                 }
             });
@@ -74,61 +76,56 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
     var auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
     request({url: url, headers: {"Authorization": auth}},
         function (error, response, body) {
-            if (!error) {
+            //Process successful token response
+            var tokenResp = JSON.parse(body);
 
-                //Process successful token response
-                var tokenResp = JSON.parse(body);
-                //Check if response contains error message
-                if (!tokenResp.errorCode) {
-                    var update = {
-                        lastUpdated: moment().format('YYYY-MM-DD HH:mm:ss'),
-                        accessToken: tokenResp.access_token,
-                        timeout: tokenResp.expires_in,
-                        service: serviceName
-                    };
-                    if (newInstance) {
-                        //Create new access token for M-Pesa service
-                        token = new tokenModel(
-                            update
-                        );
-                        //Save service token
-                        token.save(function (err) {
+            //Check if response contains error
+            if (!error || !tokenResp.errorCode) {
+                var newToken = {
+                    lastUpdated: moment().format('YYYY-MM-DD HH:mm:ss'),
+                    accessToken: tokenResp.access_token,
+                    timeout: tokenResp.expires_in,
+                    service: serviceName
+                };
+
+                if (newInstance) {
+                    //Create new access token for M-Pesa service
+                    token = new tokenModel(
+                        newToken
+                    );
+                    //Save service token
+                    token.save(function (err) {
+                        if (err) {
+                            req.status = false;
+                            req.code = GENERIC_SERVER_ERROR_CODE;
+                            req.statusMessage = 'Unable to save token. Service: ' + serviceName;
+                        } else {
+                            req.transactionToken = token.accessToken;
+                        }
+                        next();
+                    });
+                } else {
+                    //Update existing access token
+                    var conditions = {service: serviceName},
+                        options = {multi: true};
+                    //Update existing token
+                    tokenModel.update(conditions, newToken, options,
+                        function (err, record) {
                             if (err) {
                                 req.status = false;
-                                req.code='01';
-                                req.statusMessage = 'Unable to save token. Service: ' + serviceName;
+                                req.code = GENERIC_SERVER_ERROR_CODE;
+                                req.statusMessage = 'Unable to update token. Service: ' + serviceName;
                             } else {
-                                req.transactionToken = token.accessToken;
+                                if (record) req.transactionToken = newToken.accessToken;
                             }
                             next();
-                        });
-                    } else {
-                        //Update existing access token
-                        var conditions = {service: serviceName},
-                            options = {multi: true};
-                        //Update existing token
-                        tokenModel.update(conditions, update, options,
-                            function (err, record) {
-                                if (err) {
-                                    req.status = false;
-                                    req.code='01';
-                                    req.statusMessage = 'Unable to update token. Service: ' + serviceName;
-                                } else {
-                                    if (record) req.transactionToken = update.accessToken;
-                                }
-                                next();
-                            })
-                    }
-                } else {
-                    req.status = false;
-                    req.code = tokenResp.errorCode;
-                    req.statusMessage = tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing';
+                        })
                 }
             } else {
                 //Body is empty
                 req.status = false;
-                req.code = '01';
-                req.statusMessage = error.getMessage();
+                req.code = tokenResp.errorCode || GENERIC_SERVER_ERROR_CODE;
+                req.statusMessage = (tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing') || error.getMessage();
                 next();
             }
         });
