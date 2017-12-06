@@ -5,9 +5,10 @@ const STK_PUSH = 'STK-PUSH',
     GENERIC_SERVER_ERROR_CODE = '01';
 
 //Authentication model
-var tokenModel = require('./tokenModel');
-var properties = require('nconf');
+var tokenModel = require('./tokenModel'),
+    properties = require('nconf');
 
+var mpesaFunctions = require('../helpers/mpesaFunctions');
 // Then load properties from a designated file.
 properties.file({file: 'config/properties.json'});
 
@@ -96,9 +97,7 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                     //Save service token
                     token.save(function (err) {
                         if (err) {
-                            req.status = false;
-                            req.code = GENERIC_SERVER_ERROR_CODE;
-                            req.statusMessage = 'Unable to save token. Service: ' + serviceName;
+                            req = mpesaFunctions.handleError(req, 'Unable to save token. Service: ' + serviceName);
                         } else {
                             req.transactionToken = token.accessToken;
                         }
@@ -112,9 +111,7 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                     tokenModel.update(conditions, newToken, options,
                         function (err, record) {
                             if (err) {
-                                req.status = false;
-                                req.code = GENERIC_SERVER_ERROR_CODE;
-                                req.statusMessage = 'Unable to update token. Service: ' + serviceName;
+                                req = mpesaFunctions.handleError(req, 'Unable to update token. Service: ' + serviceName);
                             } else {
                                 if (record) req.transactionToken = newToken.accessToken;
                             }
@@ -123,9 +120,7 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                 }
             } else {
                 //Body is empty
-                req.status = false;
-                req.code = tokenResp.errorCode || GENERIC_SERVER_ERROR_CODE;
-                req.statusMessage = (tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing') || error.getMessage();
+                req = mpesaFunctions.handleError(req, (tokenResp.errorMessage ? tokenResp.errorMessage : 'Failed Auth token processing') || error.getMessage());
                 next();
             }
         });

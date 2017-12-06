@@ -28,12 +28,29 @@ var txnRepository = new mongoose.Schema(
             ResponseCode: String,
             ResponseDescription: String,
             CustomerMessage: String
+        },
+        mpesaCallback: {
+            stkCallback: {
+                CheckoutRequestID: String,
+                MerchantRequestID: String,
+                ResultCode: Number,
+                ResultDesc: String,
+                CallbackMetadata: {
+                    Item: [
+                        {
+                            Name: String,
+                            Value: String
+                        }
+                    ]
+                }
+            }
         }
+
     }
 );
 
 // Create a model based on the schema
-var  lipaNaMpesaTransaction= mongoose.model('lipaNaMpesaTxn', txnRepository);
+var lipaNaMpesaTransaction = mongoose.model('lipaNaMpesaTxn', txnRepository);
 
 //Export model
 module.exports = lipaNaMpesaTransaction;

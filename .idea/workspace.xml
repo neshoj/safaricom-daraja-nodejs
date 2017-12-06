@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b20b66d2-994f-4c09-ab1d-ee8b14e5d1bf" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/neshoj.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/neshoj.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/neshoj.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" afterPath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" />
       <change beforePath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" afterPath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" />
@@ -23,28 +24,28 @@
       <file leaf-file-name="lipaNaMPesa.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="104" column="50" lean-forward="false" selection-start-line="104" selection-start-column="50" selection-end-line="104" selection-end-column="50" />
+            <state relative-caret-position="170">
+              <caret line="186" column="1" lean-forward="true" selection-start-line="186" selection-start-column="1" selection-end-line="186" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tokenModel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/auth/tokenModel.js">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+            <state relative-caret-position="85">
+              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lipaNaMPesaTnxModel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js">
+      <file leaf-file-name="mpesaFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="31" />
+            <state relative-caret-position="131">
+              <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -53,8 +54,8 @@
       <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="23" column="56" lean-forward="false" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+            <state relative-caret-position="113">
+              <caret line="111" column="48" lean-forward="true" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -81,6 +82,8 @@
       <find>lipanampesa</find>
       <find>'01'</find>
       <find>GENERIC_ERROR_CODE</find>
+      <find>handleError</find>
+      <find>GENERIC_SERVER_ERROR_CODE</find>
     </findStrings>
     <replaceStrings>
       <replace>.transactionToken</replace>
@@ -104,12 +107,13 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/api/api.js" />
         <option value="$PROJECT_DIR$/bin/www" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/auth/tokenModel.js" />
         <option value="$PROJECT_DIR$/config/properties.json" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/routes/auth/auth.js" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" />
+        <option value="$PROJECT_DIR$/routes/auth/auth.js" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" />
       </list>
     </option>
@@ -159,25 +163,6 @@
               <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="lipanampesa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -189,9 +174,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="6.9.4" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/WebstormProjects/inuajamii" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\opensource\safaricom-daraja-nodejs\routes" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\opensource\safaricom-daraja-nodejs\routes\auth" />
     </key>
@@ -225,7 +213,7 @@
       <workItem from="1512332269811" duration="1539000" />
       <workItem from="1512362825599" duration="23963000" />
       <workItem from="1512447311835" duration="10966000" />
-      <workItem from="1512533923041" duration="3264000" />
+      <workItem from="1512533923041" duration="12625000" />
     </task>
     <task id="LOCAL-00001" summary="Changed readme">
       <created>1512331162958</created>
@@ -283,11 +271,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512460952588</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Refactored LipaNaMpesa and auth controllers&#10;Changed name of document storing lipa na mpesa transactions">
+      <created>1512537682262</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1512537682262</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40764000" />
+    <option name="totallyTimeSpent" value="50125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
@@ -299,7 +294,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2560778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27876824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32840723" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -329,7 +324,8 @@
     <MESSAGE value="Saving STK Push transaction to database" />
     <MESSAGE value="Revamped readme" />
     <MESSAGE value="corrected readme headings" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected readme headings" />
+    <MESSAGE value="Refactored LipaNaMpesa and auth controllers&#10;Changed name of document storing lipa na mpesa transactions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored LipaNaMpesa and auth controllers&#10;Changed name of document storing lipa na mpesa transactions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -477,14 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -517,14 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="56" lean-forward="false" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/auth/tokenModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -533,18 +513,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/response.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="729" column="9" lean-forward="false" selection-start-line="729" selection-start-column="9" selection-end-line="729" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="31" />
+        <state relative-caret-position="425">
+          <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="111" column="48" lean-forward="true" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="104" column="50" lean-forward="false" selection-start-line="104" selection-start-column="50" selection-end-line="104" selection-end-column="50" />
+        <state relative-caret-position="170">
+          <caret line="186" column="1" lean-forward="true" selection-start-line="186" selection-start-column="1" selection-end-line="186" selection-end-column="1" />
           <folding />
         </state>
       </provider>

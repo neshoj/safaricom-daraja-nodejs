@@ -1,12 +1,12 @@
 var express = require('express'),
     stkPushRouter = express.Router(),
-    moment = require('moment'),
-    request = require('request');
+    moment = require('moment');
 
 //Lipa Na M-pesa model
 var lipaNaMpesa = require('./lipaNaMPesaTnxModel');
 
 var auth = require('../../auth/auth');
+var mpesaFunctions = require('../../helpers/mpesaFunctions');
 var properties = require('nconf');
 
 // Then load properties from a designated file.
@@ -22,31 +22,30 @@ var bootstrapRequest = function (req, res, next) {
         /****************************
          {"amount":"5","phoneNumber":"2547******","callBackURL":"http://some-url","accountReference":"123456","description":"school fees"}
          *******************************/
-        if (request.amount || request.phoneNumber || request.callBackURL || request.accountReference || request.description) {
-            var BusinessShortCode = properties.get('lipaNaMpesa:shortCode');
-            var timeStamp = moment().format('YYYYMMDDHHmmss');
-            //Request object
-            req.mpesaTransaction = {
-                BusinessShortCode: BusinessShortCode,
-                Password: new Buffer(BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp).toString("base64"),
-                Timestamp: timeStamp,
-                TransactionType: 'CustomerPayBillOnline',
-                Amount: request.amount,
-                PartyA: request.phoneNumber,
-                PartyB: BusinessShortCode,
-                PhoneNumber: request.phoneNumber,
-                CallBackURL: properties.get('lipaNaMpesa:callBackURL'),
-                AccountReference: request.accountReference,
-                TransactionDesc: request.description
-            };
-            console.log(' POST Req: ' + JSON.stringify(req.mpesaTransaction));
-            // First time set processing status to be true
-            req.status = true;
-        } else {
-            req.status = false;
-            req.code = GENERIC_SERVER_ERROR_CODE;
-            req.statusMessage = 'Invalid request received';
+        if (!(request.amount || request.phoneNumber || request.callBackURL || request.accountReference || request.description)) {
+            mpesaFunctions.handleError(req, 'Invalid request received');
         }
+
+        var BusinessShortCode = properties.get('lipaNaMpesa:shortCode');
+        var timeStamp = moment().format('YYYYMMDDHHmmss');
+        //Request object
+        req.mpesaTransaction = {
+            BusinessShortCode: BusinessShortCode,
+            Password: new Buffer(BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp).toString("base64"),
+            Timestamp: timeStamp,
+            TransactionType: 'CustomerPayBillOnline',
+            Amount: request.amount,
+            PartyA: request.phoneNumber,
+            PartyB: BusinessShortCode,
+            PhoneNumber: request.phoneNumber,
+            CallBackURL: properties.get('lipaNaMpesa:callBackURL'),
+            AccountReference: request.accountReference,
+            TransactionDesc: request.description
+        };
+        console.log(' POST Req: ' + JSON.stringify(req.mpesaTransaction));
+        // First time set processing status to be true
+        req.status = true;
+
         next();
     }
 ;
@@ -55,68 +54,43 @@ var bootstrapRequest = function (req, res, next) {
  * Post transaction to Mpesa
  */
 function postTransaction(req, res, next) {
-    if (req.status) {
-        var url = properties.get('lipaNaMpesa:processRequest'),
-            auth = "Bearer " + req.transactionToken;
+    //Move along, transaction already failed
+    if (!req.status) next();
 
-        request(
-            {
-                method: 'POST',
-                url: url,
-                headers: {
-                    "Authorization": auth
-                },
-                json: req.mpesaTransaction
-            },
-            function (error, response, body) {
+    // Set url, AUTH token and transaction
+    mpesaFunctions.sendMpesaTxnToSafaricomAPI({
+        url: properties.get('lipaNaMpesa:processRequest'),
+        auth: "Bearer " + req.transactionToken,
+        transaction: req.mpesaTransaction
+    }, req, res, next);
 
-                if (!error && !body.errorCode && !body.fault) {
-                    console.log('POST Resp: ' + JSON.stringify(body));
-                    //Successful processing
-                    req.transactionResp = body;
-                } else {
-                    console.log('Error occurred: ' + JSON.stringify(body));
-                    req.status = false;
-                    req.code = body.errorCode || GENERIC_SERVER_ERROR_CODE;
-                    req.statusMessage = body.fault.faultstring || body.errorMessage || error.getMessage();
-                }
-                next();
-            }
-        )
-    } else {
-        //Move along, transaction already failed
-        next();
-    }
+
 }
 
 function processResponse(req, res, next) {
-    if (req.status) {
-        //Prepare external response message
-        req.merchantMsg = {
-            status: req.transactionResp.ResponseCode === '0' ? '00' : req.transactionResp.ResponseCode,
-            message: req.transactionResp.ResponseDescription,
-            merchantRequestId: req.transactionResp.MerchantRequestID,
-            checkoutRequestId: req.transactionResp.CheckoutRequestID
-        };
-        //Prepare persistence object
-        var transaction = new lipaNaMpesa({
-            request: req.body,
-            mpesaInitRequest: req.mpesaTransaction,
-            mpesaInitResponse: req.transactionResp
-        });
-        //Persist transaction object
-        transaction.save(function (err) {
-            if (err) {
-                req.status = false;
-                req.code = GENERIC_SERVER_ERROR_CODE;
-                req.statusMessage = 'Unable to persist lipa na mpesa transaction';
-            }
-            next();
-        });
-    } else {
-        //Move along, transaction already failed
+    //Move along, transaction already failed
+    if (!req.status) next();
+
+    //Prepare external response message
+    req.merchantMsg = {
+        status: req.transactionResp.ResponseCode === '0' ? '00' : req.transactionResp.ResponseCode,
+        message: req.transactionResp.ResponseDescription,
+        merchantRequestId: req.transactionResp.MerchantRequestID,
+        checkoutRequestId: req.transactionResp.CheckoutRequestID
+    };
+    //Prepare persistence object
+    var transaction = new lipaNaMpesa({
+        request: req.body,
+        mpesaInitRequest: req.mpesaTransaction,
+        mpesaInitResponse: req.transactionResp
+    });
+    //Persist transaction object
+    transaction.save(function (err) {
+        if (err) req = mpesaFunctions.handleError(req, 'Unable to persist lipa na mpesa transaction');
+
         next();
-    }
+    });
+
 }
 
 /**
@@ -144,14 +118,84 @@ stkPushRouter.post('/process',
  * @param res
  * @param next
  */
-function processCallback(req, res, next) {
+function fetchTransaction(req, res, next) {
+    console.log('Fetch initial transaction request...');
+    //Check validity of message
+    if (!req.body) {
+        req = mpesaFunctions.handleError(req, 'Invalid message received');
+        next();
+    }
+
+    var query = lipaNaMpesa.findOne({
+        'mpesaInitResponse.MerchantRequestID': req.body.Body.stkCallback.MerchantRequestID,
+        'mpesaInitResponse.CheckoutRequestID': req.body.Body.stkCallback.CheckoutRequestID
+    });
+
+    // execute the query at a later time
+    query.exec(function (err, lipaNaMPesaTransaction) {
+        //handle error
+        if (err || !lipaNaMPesaTransaction) {
+            req = mpesaFunctions.handleError(req, 'Initial Mpesa transaction not found');
+            next();
+        }
+        console.log('Initial transaction request found...');
+        //Add transaction to req body
+        req.lipaNaMPesaTransaction = lipaNaMPesaTransaction;
+        req.status=true;
+        next();
+    })
+
 
 }
 
-stkPushRouter.post('/callback',
-    processCallback,
-    function (req, res, next) {
+function updateTransaction(req, res, next) {
+    console.log('update Transaction Callback...');
+    //Move along, transaction already failed
+    if (!req.status) {
+        next()
+    } else {
 
+        var conditions = {
+                'mpesaInitResponse.MerchantRequestID': req.body.Body.stkCallback.MerchantRequestID,
+                'mpesaInitResponse.CheckoutRequestID': req.body.Body.stkCallback.CheckoutRequestID
+            },
+            options = {multi: true};
+        // Set callback request to existing transaction
+        req.lipaNaMPesaTransaction.mpesaCallback = req.body.Body;
+        //Update existing transaction
+        lipaNaMpesa.update(conditions, req.lipaNaMPesaTransaction, options,
+            function (err) {
+                if (err) {
+                    req = mpesaFunctions.handleError(req, 'Unable to update transaction');
+                    console.log('Problem updating record');
+                    console.log(err);
+                }
+                next();
+            });
+    }
+}
+
+/**
+ * Forward request to transaction initiator via callback
+ * @param req
+ * @param res
+ * @param next
+ */
+function forwardRequestToRemoteClient(req, res, next) {
+    console.log('Send request to originator..');
+    next();
+}
+
+stkPushRouter.post('/callback',
+    fetchTransaction,
+    updateTransaction,
+    forwardRequestToRemoteClient,
+    function (req, res, next) {
+        res.json({
+            ResultCode: 0,
+            ResultDesc: "The service request is processed successfully."
+        });
     });
+
 
 module.exports = stkPushRouter;
