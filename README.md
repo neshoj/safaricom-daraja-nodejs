@@ -1,3 +1,5 @@
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 # safaricom-daraja-nodejs
 NodeJS based transaction processor middleware implementation for the [Daraja Safaricom M-Pesa API](https://developer.safaricom.co.ke)
 
