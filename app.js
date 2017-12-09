@@ -21,6 +21,7 @@ mongoose.Promise = global.Promise
 var db = mongoose.connection
 
 var lipaNaMpesa = require('./routes/api/lipanampesa/lipaNaMPesa')
+var lipaNaMpesaQuery = require('./routes/api/lipanampesa/lipaNaMPesaQuery')
 var index = require('./routes/index')
 
 var app = express()
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
 app.use('/stkpush', lipaNaMpesa)
+app.use('/stkpush/query', lipaNaMpesaQuery)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
