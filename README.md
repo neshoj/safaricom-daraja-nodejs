@@ -73,6 +73,30 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
       "message": "Success"
     }    
     ```
+     
+   ###### Query status Request ######
+   
+   Query the API service for transaction confirmation not received. The transaction queries the
+   local database before querying safaricom for the transaction
+   
+   ```
+   {     
+     "merchantRequestId": "16949-1561111-1",
+     "checkoutRequestId": "ws_CO_05122017091747935"
+   }   
+   ```
+    
+    The response for a successful transaction request will contain the fields below
+    
+    ```
+    {
+       "status": "00",
+       "message": "Transaction confirmed successfully.",
+       "merchantRequestId": "16949-1561111-1",
+       "checkoutRequestId": "ws_CO_05122017091747935",
+       "mpesaReference": "LIC86ZTXKO"
+    }    
+    ```
 
 > __NOTE: More daraja mpesa implementation will be included__
 
