@@ -8,6 +8,7 @@
   },
   "lipaNaMpesa":{
     "processRequest": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+    "queryRequest": "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
     "key":"bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
     "shortCode":"174379",
     "consumerKey":"H65FlGErvyuFvsajRekG9zcRdnQ30kHO",

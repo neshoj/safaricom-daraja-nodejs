@@ -112,12 +112,14 @@ function fetchLipaNaMpesaTransaction(keys, req, res, next) {
         if (err || !lipaNaMPesaTransaction) {
             req = handleError(req, 'Lipa Mpesa transaction not found')
             next()
+        } else {
+
+            console.log('Transaction request found...' )
+            // Add transaction to req body
+            req.lipaNaMPesaTransaction = lipaNaMPesaTransaction
+            req.status = true
+            next()
         }
-        console.log('Transaction request found...')
-        // Add transaction to req body
-        req.lipaNaMPesaTransaction = lipaNaMPesaTransaction
-        req.status = true
-        next()
     })
 }
 

@@ -15,6 +15,12 @@ properties.file({file: 'config/properties.json'})
 const LIPA_NA_MPESA_SERVICE_NAME = 'STK-PUSH'
 const GENERIC_SERVER_ERROR_CODE = '01'
 
+/**
+ * Build request object
+ * @param req
+ * @param res
+ * @param next
+ */
 var bootstrapRequest = function (req, res, next) {
     req.body.service = LIPA_NA_MPESA_SERVICE_NAME
     var request = req.body

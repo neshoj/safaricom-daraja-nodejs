@@ -1,13 +1,10 @@
 var express = require('express')
 var lipaNaMpesaQueryRouter = express.Router()
-
-// Lipa Na M-pesa model
-var LipaNaMpesa = require('./lipaNaMPesaTnxModel')
-
-// Lipa Na M-pesa model
-var LipaNaMpesa = require('./lipaNaMPesaTnxModel')
-
 var auth = require('../../auth/auth')
+
+// Lipa Na Mpesa model
+var LipaNaMpesa = require('./lipaNaMPesaTnxModel')
+
 var mpesaFunctions = require('../../helpers/mpesaFunctions')
 var properties = require('nconf')
 
@@ -36,21 +33,53 @@ function querySafaricomForRecord(req, res, next) {
     if (req.lipaNaMPesaTransaction) {
         req.tnxFoundLocally = true
         next()
-    }
+    } else {
+        //Query
+        var BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
+        var timeStamp = moment().format('YYYYMMDDHHmmss')
+        var rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
 
-    //Query
-    // next();
+        req.mpesaTransaction = {
+            BusinessShortCode: BusinessShortCode,
+            Password: Buffer.from(rawPass).toString('base64'),
+            Timestamp: timeStamp,
+            CheckoutRequestID: req.body.checkoutRequestId
+        }
+        //Add auth token then send to safaricom
+        auth(req, res, function (req, res, next) {
+// Move along, transaction already failed
+            if (!req.status) next()
+
+            // Set url, AUTH token and transaction
+            mpesaFunctions.sendMpesaTxnToSafaricomAPI({
+                url: properties.get('lipaNaMpesa:queryRequest'),
+                auth: 'Bearer ' + req.transactionToken,
+                transaction: req.mpesaTransaction
+            }, req, res, next)
+        })
+    }
 }
 
 function result(req, res, next) {
 
-    if (req.tnxFoundLocally)
+    if (req.transactionResp) console.log(req.transactionResp)
+
+
+    if (req.tnxFoundLocally) {
         res.json({
             merchantRequestId: req.lipaNaMPesaTransaction.mpesaInitResponse.MerchantRequestID,
             checkoutRequestId: req.lipaNaMPesaTransaction.mpesaInitResponse.CheckoutRequestID,
             message: req.lipaNaMPesaTransaction.mpesaInitResponse.ResponseDescription,
-            status: req.lipaNaMPesaTransaction.mpesaInitResponse.ResponseCode === '0' ? '00' : req.lipaNaMPesaTransaction.mpesaInitResponse.ResponseCode,
+            status: req.lipaNaMPesaTransaction.mpesaInitResponse.ResponseCode === '0' ? '00' : req.lipaNaMPesaTransaction.mpesaInitResponse.ResponseCode
         });
+    } else {
+        res.json({
+            merchantRequestId: '',
+            checkoutRequestId: '',
+            message: '',
+            status: '00'
+        })
+    }
 }
 
 lipaNaMpesaQueryRouter.post('/',
