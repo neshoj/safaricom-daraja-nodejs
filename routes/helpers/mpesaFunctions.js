@@ -76,13 +76,15 @@ function sendCallbackMpesaTxnToAPIInitiator(txnDetails, req, res, next) {
  * @param next
  */
 function httpResponseBodyProcessor(responseData, req, res, next) {
+
+    console.log('HttpResponseBodyProcessor: '+ JSON.stringify(responseData))
     if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error) {
         console.log('POST Resp: ' + JSON.stringify(responseData.body))
         // Successful processing
         req.transactionResp = responseData.body
     } else {
         console.log('Error occurred: ' + JSON.stringify(responseData.body))
-        this.handleError(req, (responseData.body.fault.faultstring || responseData.body.errorMessage || responseData.error.getMessage()), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
+        handleError(req, ( responseData.body.errorMessage || responseData.body.fault.faultstring || responseData.error.getMessage()), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
     }
     next()
 }
@@ -109,10 +111,15 @@ function fetchLipaNaMpesaTransaction(keys, req, res, next) {
     // execute the query at a later time
     query.exec(function (err, lipaNaMPesaTransaction) {
         // handle error
-        if (err || !lipaNaMPesaTransaction) {
+        if (err) {
             req = handleError(req, 'Lipa Mpesa transaction not found')
+            req.status = false
             next()
-        } else {
+        } else if(!lipaNaMPesaTransaction){
+            console.log('Lipa Mpesa transaction not found');
+            req.status = true
+            next()
+        } else{
 
             console.log('Transaction request found...' )
             // Add transaction to req body
