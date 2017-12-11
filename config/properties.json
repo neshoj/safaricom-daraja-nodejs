@@ -20,6 +20,7 @@
     "shortCode": "174379",
     "consumerKey": "3uHElGTxJIBqf3LfcUJ8UJPYmV8sX25s",
     "consumerSecret": "PbhGFEm9Adu0VA7g",
-    "callBackURL": "https://api.binary.co.ke/api/v1/lipaNaMpesaService/callback"
+    "confirmationURL": "https://api.binary.co.ke/api/v1/c2b/confirm",
+    "validationURL": "https://api.binary.co.ke/api/v1/c2b/validate"
   }
 }
