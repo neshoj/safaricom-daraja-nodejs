@@ -6,11 +6,6 @@ var callBackURLRepository = new mongoose.Schema(
         merchant: {
             confirmation: String,
             validation: String
-        },
-        api: {
-            confirmation: String,
-            validation: String,
-            registered: Boolean
         }
     }
 )

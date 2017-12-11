@@ -1,6 +1,7 @@
 var moment = require('moment')
 var request = require('request')
 const STK_PUSH = 'STK-PUSH'
+var C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
 var TOKEN_INVALIDITY_WINDOW = 240
 var GENERIC_SERVER_ERROR_CODE = '01'
 
@@ -68,6 +69,11 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
         case STK_PUSH: {
             consumerKey = properties.get('lipaNaMpesa:consumerKey')
             consumerSecret = properties.get('lipaNaMpesa:consumerSecret')
+            break
+        }
+        case C2B_URL_REGISTRATION_SERVICE_NAME:{
+            consumerKey = properties.get('validationConfirm:consumerKey')
+            consumerSecret = properties.get('validationConfirm:consumerSecret')
             break
         }
     }

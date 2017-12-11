@@ -17,10 +17,11 @@
   },
   "validationConfirm": {
     "registerURLs": "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl",
-    "shortCode": "174379",
+    "shortCode": "600169",
     "consumerKey": "3uHElGTxJIBqf3LfcUJ8UJPYmV8sX25s",
     "consumerSecret": "PbhGFEm9Adu0VA7g",
     "confirmationURL": "https://api.binary.co.ke/api/v1/c2b/confirm",
-    "validationURL": "https://api.binary.co.ke/api/v1/c2b/validate"
+    "validationURL": "https://api.binary.co.ke/api/v1/c2b/validate",
+    "responseType": "Completed"
   }
 }

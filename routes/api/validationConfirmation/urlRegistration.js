@@ -11,6 +11,7 @@ var properties = require('nconf')
 properties.file({file: 'config/properties.json'})
 
 var CallbackURLModel = require('./c2bCallbackUrlModel')
+var C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
 
 /**
  * Save merchant call backs to database
@@ -28,34 +29,28 @@ function registerMerchantCallBackUrl(req, res, next) {
     })
 
     // Execute query
-    query.exec(function (err, callbackRepository) {
+    query.exec(function (err, callbackURLs) {
         // handle error
         if (err) {
             mpesaFunctions.handleError(res, 'Error fetching url registration object ' + err.message, GENERIC_SERVER_ERROR_CODE)
         }
-
-        var newRecord = new CallbackURLModel(
-            {
-                shortCode: req.body.shortCode,
-                merchant: {
-                    confirmation: req.body.confirmationURL,
-                    validation: req.body.validationURL
-                },
-                api: {
-                    confirmation: properties.get('validationConfirm:confirmationURL'),
-                    validation: properties.get('lipaNaMpesa:validationURL'),
-                    registered: false
-                }
+        //  New record
+        var newRecord = {
+            shortCode: req.body.shortCode,
+            merchant: {
+                confirmation: req.body.confirmationURL,
+                validation: req.body.validationURL
             }
-        )
+        }
 
-        if (callbackRepository) {
+        if (callbackURLs) {
+            console.log('Updating C2B Urls to local database')
             //    Update record
             var conditions = {
                 'shortCode': req.body.shortCode
             }
             var options = {multi: true}
-            CallbackURLModel.update(conditions, req.lipaNaMPesaTransaction, options,
+            CallbackURLModel.update(conditions, newRecord, options,
                 function (err) {
                     if (err) {
                         mpesaFunctions.handleError(res, 'Unable to update transaction ' + err.message, GENERIC_SERVER_ERROR_CODE)
@@ -64,8 +59,12 @@ function registerMerchantCallBackUrl(req, res, next) {
                     }
                 })
         } else {
+            console.log('Saving C2B Urls to local database')
+            var callbackUrl = new CallbackURLModel(
+                newRecord
+            )
             //  Save new record
-            newRecord.save(function (err) {
+            callbackUrl.save(function (err) {
                 if (err) {
                     mpesaFunctions.handleError(res, err.message, GENERIC_SERVER_ERROR_CODE)
                 } else {
@@ -84,19 +83,47 @@ function registerMerchantCallBackUrl(req, res, next) {
  * @param next
  */
 function registerAPICallBackUrl(req, res, next) {
+    //    Prepare request object
+    var URLsRegistrationObject = {
+        ValidationURL: properties.get('validationConfirm:validationURL'),
+        ConfirmationURL: properties.get('validationConfirm:confirmationURL'),
+        ResponseType: properties.get('validationConfirm:responseType'),
+        ShortCode: properties.get('validationConfirm:shortCode')
+    }
+
+    // Set url, AUTH token and transaction
+    mpesaFunctions.sendMpesaTxnToSafaricomAPI({
+        url: properties.get('validationConfirm:registerURLs'),
+        auth: 'Bearer ' + req.transactionToken,
+        transaction: URLsRegistrationObject
+    }, req, res, next)
+
+}
+
+function setServiceName(req, res, next) {
+    req.body.service = C2B_URL_REGISTRATION_SERVICE_NAME
     next();
 }
 
-c2bRegistrationRouter.post('/register',
-    registerMerchantCallBackUrl,
+c2bRegistrationRouter.put('/register/safaricom',
+    setServiceName,
+    auth,
     registerAPICallBackUrl,
     function (req, res, next) {
-
         res.json({
             status: '00',
-            message: 'Url Registered successfully'
+            message: req.transactionResp.ResponseDescription || 'URL registered successful'
         });
     });
 
+c2bRegistrationRouter.post('/register/merchant',
+    setServiceName,
+    registerMerchantCallBackUrl,
+    function (req, res, next) {
+        res.json({
+            status: '00',
+            message: 'URL registration successful'
+        });
+    });
 
 module.exports = c2bRegistrationRouter
