@@ -23,6 +23,8 @@ var db = mongoose.connection
 var lipaNaMpesa = require('./routes/api/lipanampesa/lipaNaMPesa')
 var lipaNaMpesaQuery = require('./routes/api/lipanampesa/lipaNaMPesaQuery')
 var c2b = require('./routes/api/validationConfirmation/urlRegistration')
+var c2bValidation = require('./routes/api/validationConfirmation/c2bValidation')
+var c2bConfirmation = require('./routes/api/validationConfirmation/c2bConfirmation')
 var index = require('./routes/index')
 
 var app = express()
@@ -43,6 +45,8 @@ app.use('/', index)
 app.use('/stkpush', lipaNaMpesa)
 app.use('/stkpush/query', lipaNaMpesaQuery)
 app.use('/c2b', c2b)
+app.use('/c2b/validate', c2bValidation)
+app.use('/c2b/confirm', c2bConfirmation)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

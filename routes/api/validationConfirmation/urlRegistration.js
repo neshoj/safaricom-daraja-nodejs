@@ -1,6 +1,5 @@
 var express = require('express')
 var c2bRegistrationRouter = express.Router()
-var moment = require('moment')
 
 var auth = require('../../auth/auth')
 var mpesaFunctions = require('../../helpers/mpesaFunctions')
