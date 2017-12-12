@@ -4,30 +4,35 @@ var c2bValidationRouter = express.Router()
 var mpesaFunctions = require('../../helpers/mpesaFunctions')
 var C2BTransaction = require('./c2bTransactionModel');
 const GENERIC_SERVER_ERROR_CODE = '01'
+const VALIDATION_TRANSACTION_ACTION_TYPE = 'validate'
 
 var validateRequest = function (req, res, next) {
     if (!req.body)
         mpesaFunctions.handleError(res, 'Invalid request received', GENERIC_SERVER_ERROR_CODE)
 
-    next();
+    mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
+        url: '',
+        transaction: {
+            transactionType: req.body.TransactionType,
+            action: VALIDATION_TRANSACTION_ACTION_TYPE,
+            phone: req.body.MSISDN,
+            firstName: req.body.FirstName,
+            middleName: req.body.MiddleName,
+            lastName: req.body.LastName,
+            amount: req.body.TransAmount,
+            accountNumber: req.body.BillRefNumber,
+            time: req.body.TransTime
+        }
+    }, req, res, next)
+
 }
 
-var sendRequestToRemoteApplication = function (req, res, next) {
-
-    req.validationResult = {
-        status: '00',
-        message: 'Account is valid',
-        transactionId: '1234566'
-    }
-
-    next();
-}
 
 var saveTransaction = function (req, res, next) {
     var transaction = new C2BTransaction(
         {
             validation: req.body,
-            validationResult: req.validationResult
+            validationResult: req.transactionResp
         }
     )
 //   persist transaction details
@@ -42,7 +47,6 @@ var saveTransaction = function (req, res, next) {
 
 c2bValidationRouter.post('/',
     validateRequest,
-    sendRequestToRemoteApplication,
     saveTransaction,
     function (req, res, next) {
         res.json({

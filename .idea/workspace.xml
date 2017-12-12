@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b20b66d2-994f-4c09-ab1d-ee8b14e5d1bf" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" />
       <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,17 +19,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="c2bValidation.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="c2bValidation.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="295">
+              <caret line="49" column="20" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="c2bTransactionModel.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mpesaFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="53" column="54" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="c2bTransactionModel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="211">
@@ -54,8 +64,8 @@
       <file leaf-file-name="c2bConfirmation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="11" />
+            <state relative-caret-position="85">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,11 +120,14 @@
       <find>.update</find>
       <find>sendMpesaTxnToSafaricomAPI</find>
       <find>.save</find>
+      <find>best wa</find>
+      <find>&quot;,</find>
     </findStrings>
     <replaceStrings>
       <replace>.transactionToken</replace>
       <replace>GENERIC_ERROR_CODE</replace>
       <replace>GENERIC_SERVER_ERROR_CODE</replace>
+      <replace>:</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -135,7 +148,6 @@
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/auth/tokenModel.js" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaQuery.js" />
         <option value="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" />
@@ -144,10 +156,11 @@
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransaction.js" />
         <option value="$PROJECT_DIR$/config/properties.json" />
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js" />
-        <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js" />
+        <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" />
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -328,7 +341,7 @@
       <workItem from="1512802311533" duration="10635000" />
       <workItem from="1512887770996" duration="10109000" />
       <workItem from="1513004466122" duration="10481000" />
-      <workItem from="1513110660879" duration="1440000" />
+      <workItem from="1513110660879" duration="2654000" />
     </task>
     <task id="LOCAL-00001" summary="Changed readme">
       <created>1512331162958</created>
@@ -484,11 +497,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513015609475</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Saving validation request to db">
+      <created>1513112158308</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1513112158308</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91597000" />
+    <option name="totallyTimeSpent" value="92811000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
@@ -498,7 +518,7 @@
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.50293684" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3855219" sideWeight="0.49706313" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.02020202" sideWeight="0.49706313" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11345219" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -544,7 +564,8 @@
     <MESSAGE value="Cleaner code. Saving merchant urls" />
     <MESSAGE value="Save and update merchant or API urls." />
     <MESSAGE value="Initial process validation and confirmation requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial process validation and confirmation requests" />
+    <MESSAGE value="Saving validation request to db" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saving validation request to db" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -784,16 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="201">
-            <caret line="93" column="56" lean-forward="true" selection-start-line="93" selection-start-column="56" selection-end-line="93" selection-end-column="56" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/response.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -846,18 +857,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="27" column="65" lean-forward="true" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -888,16 +892,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -906,6 +902,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="53" column="54" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="161">
+            <caret line="128" column="35" lean-forward="false" selection-start-line="128" selection-start-column="35" selection-end-line="128" selection-end-column="35" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="49" column="20" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
           <folding />
         </state>
       </provider>

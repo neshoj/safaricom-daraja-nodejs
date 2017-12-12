@@ -126,7 +126,7 @@ $ sudo npm update -g npm
 
 ## Install through Github
 
-Best way to install [Nsnp Monitor](http://52.49.107.237:9055/) is to clone it from Github
+Best way to install this middleware is to clone it from Github
 
 **To clone/download the boilerplate**
 
