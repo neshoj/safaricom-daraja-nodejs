@@ -17,6 +17,11 @@ var c2bTransaction = new mongoose.Schema(
             TransID: String,
             InvoiceNumber: String
         },
+        validationResult: {
+            status: String,
+            message: String,
+            transactionId: String
+        },
         confirmation: {
             TransactionType: String,
             MSISDN: String,
