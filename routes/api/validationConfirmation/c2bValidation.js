@@ -24,7 +24,6 @@ var validateRequest = function (req, res, next) {
             time: req.body.TransTime
         }
     }, req, res, next)
-
 }
 
 
@@ -39,7 +38,7 @@ var saveTransaction = function (req, res, next) {
     transaction.save(function (err) {
         if (err) mpesaFunctions.handleError(req, 'Unable to save validation request.', GENERIC_SERVER_ERROR_CODE)
 
-        console.log('Transaction saved...')
+        console.log('C2B: Validation transaction saved...')
         next();
     })
 }

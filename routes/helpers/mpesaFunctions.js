@@ -11,6 +11,7 @@ const GENERIC_SERVER_ERROR_CODE = '01'
  * @param next
  */
 function handleError(res, message, code) {
+
     // Transaction failed
     res.send({
         status: code || GENERIC_SERVER_ERROR_CODE,
@@ -89,7 +90,7 @@ function httpResponseBodyProcessor(responseData, req, res, next) {
 }
 
 /**
- * Query database for lipaNaMpesa transaction
+ * Query database for lipa Na Mpesa transaction
  * @param req
  * @param res
  * @param next
