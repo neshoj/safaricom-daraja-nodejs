@@ -23,11 +23,11 @@ var fetchToken = function (req, res, next) {
                 if (records) {
                     //    Record exists : update
                     if (isTokenValid(records)) {
-                        console.log('Token is still valid: ' + serviceName)
+                        console.log('Current Token is still valid: ' + serviceName)
                         req.transactionToken = records.accessToken
                         next()
                     } else {
-                        console.log('Token is invalid: ' + serviceName)
+                        console.log('Current Token is invalid: ' + serviceName)
                         // Token is invalid, resetting
                         setNewToken(req, res, serviceName, false, next)
                     }

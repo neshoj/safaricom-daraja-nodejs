@@ -124,8 +124,12 @@ function fetchLipaNaMpesaTransaction(keys, req, res, next) {
     })
 }
 
+function isEmpty(val){
+    return (val === undefined || val == null || val.length <= 0)
+}
 // Export model
 module.exports = {
+    isEmpty: isEmpty,
     handleError: handleError,
     sendMpesaTxnToSafaricomAPI: sendMpesaTxnToSafaricomAPI,
     sendCallbackMpesaTxnToAPIInitiator: sendCallbackMpesaTxnToAPIInitiator,

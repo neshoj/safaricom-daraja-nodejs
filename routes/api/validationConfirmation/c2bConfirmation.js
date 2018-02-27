@@ -27,13 +27,14 @@ function findInitialTransaction(req, res, next) {
         'validation.TransID': req.body.TransID
     }, function (err, validatedTnx) {
         //Check for error
-        if (err) return mpesaFunctions.handleError(res, 'Transaction not found', GENERIC_SERVER_ERROR_CODE)
+        if (err) return mpesaFunctions.handleError(res, 'Error occurred fetching initial request', GENERIC_SERVER_ERROR_CODE)
 
+        //Initial transaction not found
+        if (mpesaFunctions.isEmpty(validatedTnx)) return mpesaFunctions.handleError(res, 'Transaction not found', GENERIC_SERVER_ERROR_CODE)
 
         console.log('C2B Validation transaction found for %s Bill reference number %s.',
             validatedTnx.validation.MSISDN, validatedTnx.validation.BillRefNumber);
-        req.body.initial_tnx = validatedTnx;
-        // console.log(JSON.stringify(req.body.initial_tnx))
+        req.body.tnxFound = true;
         next();
     });
 }
@@ -65,11 +66,10 @@ function sendRequestToRemoteApplication(req, res, next) {
         'shortCode': req.body.BusinessShortCode
     }, function (err, remoteEndPoints) {
         //Invalid database response
-        if (!req.body)
-            mpesaFunctions.handleError(res, 'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered', GENERIC_SERVER_ERROR_CODE)
+        if (mpesaFunctions.isEmpty(remoteEndPoints)) return mpesaFunctions.handleError(res,
+            'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered',
+            GENERIC_SERVER_ERROR_CODE)
 
-        console.log('Transaction report: ' + JSON.stringify(confirmationReq))
-        console.log('Remote end points: ' + JSON.stringify(remoteEndPoints))
         //Forward to remote server
         mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
             url: remoteEndPoints.merchant.confirmation,
@@ -92,11 +92,11 @@ var saveTransaction = function (req, res, next) {
         'validation.BillRefNumber': req.body.BillRefNumber,
         'validation.TransID': req.body.TransID
     }
-    console.log('Fetch initial transaction')
+    //Update initial validation transaction
     C2BTransaction.update(filter, {$set: {confirmation: req.body}}, {upsert: true}, function (err) {
-        if (err) mpesaFunctions.handleError(req, 'Unable to save validation request.', GENERIC_SERVER_ERROR_CODE)
+        if (err) return mpesaFunctions.handleError(req, 'Unable to save validation request.', GENERIC_SERVER_ERROR_CODE)
 
-        console.log('Transaction updated ')
+        console.log('Tnx Id: %s from %s for %s update successfully', req.body.TransID, req.body.MSISDN, req.body.BillRefNumber)
         next();
     })
 
