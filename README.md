@@ -5,8 +5,8 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
 **Feature list**
 * [x] Auth Management
-* [x] [STK Push  Online payment  Query request](#STK-Push)
-* [x] [C2B Confirmation & Validation](#C2B-Payments)
+* [x] [STK Push  Online payment  Query request](#stk-push)
+* [x] [C2B Confirmation & Validation](#c2b-payments)
 
   ## STK Push ###
   
