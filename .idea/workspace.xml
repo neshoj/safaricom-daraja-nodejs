@@ -20,7 +20,7 @@
       <file leaf-file-name="c2bValidation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
+            <state relative-caret-position="1513">
               <caret line="89" column="47" lean-forward="false" selection-start-line="89" selection-start-column="47" selection-end-line="89" selection-end-column="60" />
               <folding />
             </state>
@@ -31,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/config/properties.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="23" selection-end-column="70" />
+              <caret line="20" column="41" lean-forward="false" selection-start-line="20" selection-start-column="41" selection-end-line="23" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="c2bConfirmation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="1224">
               <caret line="72" column="77" lean-forward="false" selection-start-line="72" selection-start-column="77" selection-end-line="72" selection-end-column="77" />
               <folding />
             </state>
@@ -50,7 +50,7 @@
       <file leaf-file-name="c2bTransactionModel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="204">
               <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
               <folding />
             </state>
@@ -60,7 +60,7 @@
       <file leaf-file-name="urlRegistration.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
+            <state relative-caret-position="2108">
               <caret line="124" column="95" lean-forward="false" selection-start-line="124" selection-start-column="95" selection-end-line="124" selection-end-column="95" />
               <folding />
             </state>
@@ -70,7 +70,7 @@
       <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
+            <state relative-caret-position="493">
               <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
               <folding />
             </state>
@@ -80,8 +80,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73">
-              <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+            <state relative-caret-position="782">
+              <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -90,8 +90,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="217" column="10" lean-forward="false" selection-start-line="217" selection-start-column="10" selection-end-line="217" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -358,7 +358,8 @@
       <workItem from="1515489995209" duration="1306000" />
       <workItem from="1519235796271" duration="1315000" />
       <workItem from="1519305260475" duration="617000" />
-      <workItem from="1519653874819" duration="23694000" />
+      <workItem from="1519653874819" duration="24023000" />
+      <workItem from="1519753182583" duration="580000" />
     </task>
     <task id="LOCAL-00001" summary="Changed readme">
       <created>1512331162958</created>
@@ -532,20 +533,20 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121852000" />
+    <option name="totallyTimeSpent" value="122761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20058565" sideWeight="0.4811321" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20058565" sideWeight="0.4811321" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.50293684" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43681747" sideWeight="0.28623718" order="11" side_tool="true" content_ui="tabs" x="0" y="180" width="1366" height="377" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6630265" sideWeight="0.28623718" order="11" side_tool="true" content_ui="tabs" x="0" y="180" width="1366" height="377" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43681747" sideWeight="0.7137628" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2324493" sideWeight="0.7137628" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46515396" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -842,7 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="31" selection-end-line="195" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -850,13 +850,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
+        <state relative-caret-position="493">
           <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
           <folding />
         </state>
@@ -864,7 +863,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="204">
           <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
           <folding />
         </state>
@@ -872,7 +871,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
+        <state relative-caret-position="2108">
           <caret line="124" column="95" lean-forward="false" selection-start-line="124" selection-start-column="95" selection-end-line="124" selection-end-column="95" />
           <folding />
         </state>
@@ -881,15 +880,15 @@
     <entry file="file://$PROJECT_DIR$/config/properties.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="23" selection-end-column="70" />
+          <caret line="20" column="41" lean-forward="false" selection-start-line="20" selection-start-column="41" selection-end-line="23" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+        <state relative-caret-position="782">
+          <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -898,13 +897,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="89" column="33" lean-forward="false" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
+        <state relative-caret-position="1513">
           <caret line="89" column="47" lean-forward="false" selection-start-line="89" selection-start-column="47" selection-end-line="89" selection-end-column="60" />
           <folding />
         </state>
@@ -912,7 +910,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="1224">
           <caret line="72" column="77" lean-forward="false" selection-start-line="72" selection-start-column="77" selection-end-line="72" selection-end-column="77" />
           <folding />
         </state>
@@ -920,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="217" column="10" lean-forward="false" selection-start-line="217" selection-start-column="10" selection-end-line="217" selection-end-column="10" />
           <folding />
         </state>
       </provider>

@@ -5,8 +5,8 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
 **Feature list**
 * [x] Auth Management
-* [x] STK Push ( Online payment & Query request )
-* [x] [ C2B ( Confirmation & Validation)] ##C2B-Payments
+* [x] [ STK Push ( Online payment & Query request ) ] (#STK-Push)
+* [x] [ C2B ( Confirmation & Validation)] (#C2B-Payments)
 
   ## STK Push ###
   
@@ -51,71 +51,72 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
   }    
   ```
   
-   ###### Callback Request ######
+  ###### Callback Request ######
    
-   This transaction is initiated by the mpesa gateway to your application. Transaction will be sent to the enp point you
-    provided in the initial request. This request may take time to arrive after sending the initial transaction request.
+  This transaction is initiated by the mpesa gateway to your application. Transaction will be sent to the enp point you 
+  provided in the initial request. This request may take time to arrive after sending the initial transaction request.
    
-   ```
-   {
-     "status": "00",
-     "message": "Transaction confirmed successfully.",
-     "merchantRequestId": "16949-1561111-1",
-     "checkoutRequestId": "ws_CO_05122017091747935",
-     "mpesaReference": "LIC86ZTXKO"
-   }   
-    ```
+       ```
+       {
+         "status": "00",
+         "message": "Transaction confirmed successfully.",
+         "merchantRequestId": "16949-1561111-1",
+         "checkoutRequestId": "ws_CO_05122017091747935",
+         "mpesaReference": "LIC86ZTXKO"
+       }   
+        ```
     
-    Respond to this transaction with the message below
+  Respond to this transaction with the message below
     
-    ```
-    {
-      "status": "00",
-      "message": "Success"
-    }    
-    ```
+        ```
+        {
+          "status": "00",
+          "message": "Success"
+        }    
+        ```
      
-   ###### Query status Request ######
+  ###### Query status Request ######
    
-   Query the API service for transaction confirmation not received. The transaction queries the
-   local database before querying safaricom for the transaction
+  Query the API service for transaction confirmation not received. The transaction queries the local database before 
+  querying safaricom for the transaction
    
-   ```
-   {     
-     "merchantRequestId": "16949-1561111-1",
-     "checkoutRequestId": "ws_CO_05122017091747935"
-   }   
-   ```
+       ```
+       {     
+         "merchantRequestId": "16949-1561111-1",
+         "checkoutRequestId": "ws_CO_05122017091747935"
+       }   
+       ```
     
-    The response for a successful transaction request will contain the fields below
+  The response for a successful transaction request will contain the fields below
     
-    ```
-    {
-       "status": "00",
-       "message": "Transaction confirmed successfully.",
-       "merchantRequestId": "16949-1561111-1",
-       "checkoutRequestId": "ws_CO_05122017091747935",
-       "mpesaReference": "LIC86ZTXKO"
-    }    
-    ```
+        ```
+        {
+           "status": "00",
+           "message": "Transaction confirmed successfully.",
+           "merchantRequestId": "16949-1561111-1",
+           "checkoutRequestId": "ws_CO_05122017091747935",
+           "mpesaReference": "LIC86ZTXKO"
+        }    
+        ```
 
 
-## C2B Payments ##
+  ## C2B Payments ##
 
-      This API enables Paybill and Buy Goods merchants to integrate to M-Pesa and receive real time payments notifications.
+  This API enables Paybill and Buy Goods merchants to integrate to M-Pesa and receive real time payments notifications.
 
-      ###### Required information ######
-      1. Mpesa pay bill short code. MUST have been configured for C2B payments
-      2. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) ensure you check
-      against C2B Production under OTP confirmation window when going through the go live steps.
-      3. On running the service register the service api end points to Safaricom and then you need to register the end points
-      of your application to this service. This enables it to forward requests to your merchant site when customers initiate payments via STK.
+   ###### Required information ######
+   1. Mpesa pay bill short code. MUST have been configured for C2B payments
+   2. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) ensure you check
+    against C2B Production under OTP confirmation window when going through the go live steps.
+   3. On running the service register the service api end points to Safaricom and then you need to register the end 
+   points of your application to this service. This enables it to forward requests to your merchant site when customers 
+   initiate payments via STK.
 
-      ###### Service End point registration ######
+   ###### Service End point registration ######
 
-      When you run this application, you have to configure its end points using a domain name that is accessible over the internet.
-      In the properties.json file enter the validation and confirmation urls on the validationURL and confirmationURL keys respectively.
-      Also, add your short code in the shortCode key.
+   When you run this application, you have to configure its end points using a domain name that is accessible over the
+    internet. In the properties.json file enter the validation and confirmation urls on the validationURL and 
+    confirmationURL keys respectively.Also, add your short code in the shortCode key.
 
       ```
 
@@ -125,11 +126,11 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
       ````
 
-      To initiate this transaction, call a put request to the end point `http://localhost:3000/c2b/register/safaricom` . This will initiate a
-      request to Safaricom to register the above configured end points.
-      On successful registration, the response received will be
+   To initiate this transaction, call a put request to the end point `http://localhost:3000/c2b/register/safaricom`.
+    This will initiate a request to Safaricom to register the above configured end points. On successful registration, 
+    the response received will be
 
-      **Sample Registration Success Response**
+   **Sample Registration Success Response**
 
       ```
       {
@@ -139,14 +140,14 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
       ```
 
-      ###### Merchant End point registration ######
+   ###### Merchant End Point Registration ######
 
-      To ensure you receive transactions on your merchant site. You have to register the end points to receive validation and confirmation
-      request.
+   To ensure you receive transactions on your merchant site. You have to register the end points to receive validation
+    and confirmation request.
 
-      Send a POST request to the service end point `http://localhost:3000/c2b/register/merchant`
+   Send a POST request to the service end point `http://localhost:3000/c2b/register/merchant`
 
-      **Sample Merchant End Point Registration Request**
+   **Sample Merchant End Point Registration Request**
 
       ```
         {
@@ -157,7 +158,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
       ````
 
-      **Sample Registration Success Response**
+   **Sample Registration Success Response**
 
       ```
       {
@@ -166,12 +167,13 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
       }
       ```
 
-      ###### Account Validation Request ######
+   ###### Account Validation Request ######
 
-      To ensure your customers are paying to the right account, M-Pesa has to send a confirmation request to confirm the existence of an account.
-      This request will be forwarded to the validation end point registered earlier under [ Merchant End Point Registration ](#Merchant End point registration )
+   To ensure your customers are paying to the right account, M-Pesa has to send a confirmation request to confirm the 
+   existence of an account. This request will be forwarded to the validation end point registered earlier under 
+   [ Merchant End Point Registration ](#merchant-end-point-registration  )
 
-      **Sample account validation Request**
+   **Sample account validation Request**
 
       ```
         {
@@ -188,7 +190,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
       ````
 
-      **Sample Account Validation Success Response**
+   **Sample Account Validation Success Response**
 
       ```
       {
@@ -198,7 +200,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
       }
       ```
 
-      **Sample Account Validation Failed Response**
+   **Sample Account Validation Failed Response**
 
       ```
       {
@@ -208,12 +210,14 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
       }
       ```
 
-       ###### Transaction Confirmation Request ######
+   ###### Transaction Confirmation Request ######
 
-       To confirm the customer's has deposited funds into your merchant pay bill, Safaricom initiates this transaction through the service
-       to the confirmation url initially registered. This request may take time to arrive after sending the initial transaction request.
+   To confirm the customer's has deposited funds into your merchant pay bill, Safaricom initiates this transaction 
+   through the service to the confirmation url initially registered. This request may take time to arrive after 
+   sending the initial transaction request. This request will be forwarded to the validation end point registered earlier
+    under [ Merchant End Point Registration ](#merchant-end-point-registration  )
 
-        **Sample Confirmation Request**
+   **Sample Confirmation Request**
 
        ```
        {
@@ -232,7 +236,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
         ```
 
-       **Sample Confirmation Response**
+   **Sample Confirmation Response**
 
         ```
         {
@@ -241,9 +245,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
         }
         ```
 
-        The confirmation transaction indicates the customer has been charged successfully.
-
-
+    The confirmation transaction indicates the customer has been charged successfully.
 
 
 > __NOTE: More daraja mpesa implementation will be included__
