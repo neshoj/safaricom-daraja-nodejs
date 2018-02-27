@@ -1,5 +1,6 @@
 var express = require('express')
 var c2bValidationRouter = express.Router()
+var moment = require('moment')
 
 var mpesaFunctions = require('../../helpers/mpesaFunctions')
 var C2BTransaction = require('./c2bTransactionModel')
@@ -28,7 +29,7 @@ var validateRequest = function (req, res, next) {
         lastName: req.body.LastName,
         amount: req.body.TransAmount,
         accountNumber: req.body.BillRefNumber,
-        time: req.body.TransTime
+        time: moment(moment(req.body.TransTime, "YYYYMMDDHHmmss")).format('YYYY-MM-DD HH:mm:ss')
     }
 
     //Find remote URL configuration from database

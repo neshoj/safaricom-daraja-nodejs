@@ -57,7 +57,7 @@ function sendRequestToRemoteApplication(req, res, next) {
         amount: req.body.TransAmount,
         accountNumber: req.body.BillRefNumber,
         transID: req.body.TransID,
-        time: moment( new Date(req.body.TransTime)).format('YYYY-MM-DD HH:mm:ss')
+        time: moment(moment(req.body.TransTime, "YYYYMMDDHHmmss")).format('YYYY-MM-DD HH:mm:ss')
     }
 
     //Find remote URL configuration from database
@@ -68,8 +68,8 @@ function sendRequestToRemoteApplication(req, res, next) {
         if (!req.body)
             mpesaFunctions.handleError(res, 'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered', GENERIC_SERVER_ERROR_CODE)
 
-        console.log('Transaction report: '+ JSON.stringify(confirmationReq))
-        console.log('Remote end points: '+ JSON.stringify(remoteEndPoints))
+        console.log('Transaction report: ' + JSON.stringify(confirmationReq))
+        console.log('Remote end points: ' + JSON.stringify(remoteEndPoints))
         //Forward to remote server
         mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
             url: remoteEndPoints.merchant.confirmation,
@@ -108,9 +108,10 @@ c2bConfirmationRouter.post('/',
     sendRequestToRemoteApplication,
     saveTransaction,
     function (req, res, next) {
+        //Static response as customer account is already debited
         res.json({
             ResultCode: 0,
-            ResultDesc: 'confirmation',
+            ResultDesc: 'Transaction confirmation successful',
             ThirdPartyTransID: ''
         })
     })
