@@ -6,7 +6,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 **Feature list**
 * [x] Auth Management
 * [x] STK Push ( Online payment & Query request )
-* [x] [C2B ( Confirmation & Validation)] ## C2B Payments ###
+* [x] [ C2B ( Confirmation & Validation)] ##C2B-Payments
 
   ## STK Push ###
   
@@ -100,7 +100,7 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
     ```
 
 
-    ## C2B Payments ##
+## C2B Payments ##
 
       This API enables Paybill and Buy Goods merchants to integrate to M-Pesa and receive real time payments notifications.
 
