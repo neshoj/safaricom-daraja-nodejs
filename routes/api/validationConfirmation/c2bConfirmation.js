@@ -70,6 +70,7 @@ function sendRequestToRemoteApplication(req, res, next) {
             'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered',
             GENERIC_SERVER_ERROR_CODE)
 
+        console.log('Confirmation Request %s', JSON.stringify(confirmationReq))
         //Forward to remote server
         mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
             url: remoteEndPoints.merchant.confirmation,

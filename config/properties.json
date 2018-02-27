@@ -17,9 +17,9 @@
   },
   "validationConfirm": {
     "registerURLs": "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl",
-    "shortCode": "600169",
     "consumerKey": "3uHElGTxJIBqf3LfcUJ8UJPYmV8sX25s",
     "consumerSecret": "PbhGFEm9Adu0VA7g",
+    "shortCode": "600169",
     "confirmationURL": "https://api.binary.co.ke/v1/payBill/confirmation",
     "validationURL": "https://api.binary.co.ke/v1/account/validation",
     "responseType": "Completed"

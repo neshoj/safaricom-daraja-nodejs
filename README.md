@@ -6,7 +6,8 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 **Feature list**
 * [x] Auth Management
 * [x] STK Push ( Online payment & Query request )
-  
+* [x] [C2B ( Confirmation & Validation)] ## C2B Payments ###
+
   ## STK Push ###
   
   Lipa na M-Pesa Online Payment API is used to initiate a M-Pesa transaction on behalf of a customer using STK Push.
@@ -97,6 +98,153 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
        "mpesaReference": "LIC86ZTXKO"
     }    
     ```
+
+
+    ## C2B Payments ##
+
+      This API enables Paybill and Buy Goods merchants to integrate to M-Pesa and receive real time payments notifications.
+
+      ###### Required information ######
+      1. Mpesa pay bill short code. MUST have been configured for C2B payments
+      2. Create a production application on [Safaricom Developer site ](https://developer.safaricom.co.ke) ensure you check
+      against C2B Production under OTP confirmation window when going through the go live steps.
+      3. On running the service register the service api end points to Safaricom and then you need to register the end points
+      of your application to this service. This enables it to forward requests to your merchant site when customers initiate payments via STK.
+
+      ###### Service End point registration ######
+
+      When you run this application, you have to configure its end points using a domain name that is accessible over the internet.
+      In the properties.json file enter the validation and confirmation urls on the validationURL and confirmationURL keys respectively.
+      Also, add your short code in the shortCode key.
+
+      ```
+
+        "shortCode": "600169",
+        "confirmationURL": "https://api.binary.co.ke/v1/payBill/confirmation",
+        "validationURL": "https://api.binary.co.ke/v1/account/validation",
+
+      ````
+
+      To initiate this transaction, call a put request to the end point `http://localhost:3000/c2b/register/safaricom` . This will initiate a
+      request to Safaricom to register the above configured end points.
+      On successful registration, the response received will be
+
+      **Sample Registration Success Response**
+
+      ```
+      {
+          "status": "00",
+          "message": "success"
+      }
+
+      ```
+
+      ###### Merchant End point registration ######
+
+      To ensure you receive transactions on your merchant site. You have to register the end points to receive validation and confirmation
+      request.
+
+      Send a POST request to the service end point `http://localhost:3000/c2b/register/merchant`
+
+      **Sample Merchant End Point Registration Request**
+
+      ```
+        {
+          "shortCode": "513833",
+          "confirmationURL": "http://localhost:3000/c2b/confirm",
+          "validationURL": "http://localhost:3000/c2b/validate"
+        }
+
+      ````
+
+      **Sample Registration Success Response**
+
+      ```
+      {
+          "status": "00",
+          "message": "URL registration successful"
+      }
+      ```
+
+      ###### Account Validation Request ######
+
+      To ensure your customers are paying to the right account, M-Pesa has to send a confirmation request to confirm the existence of an account.
+      This request will be forwarded to the validation end point registered earlier under [ Merchant End Point Registration ](#Merchant End point registration )
+
+      **Sample account validation Request**
+
+      ```
+        {
+          "transactionType": "PAY BILL",
+          "action": "validate",
+          "phone": "25470*****",
+          "firstName": "JOHN",
+          "middleName": "DOE",
+          "lastName": "",
+          "amount": "5.00",
+          "accountNumber": "DSTV12345",
+          "time": "2018-02-28 20:46:29"
+        }
+
+      ````
+
+      **Sample Account Validation Success Response**
+
+      ```
+      {
+          "status": "00",
+          "message": "Account validation success",
+          "transactionId":"MERCHANT09822FEES"
+      }
+      ```
+
+      **Sample Account Validation Failed Response**
+
+      ```
+      {
+          "status": "01",
+          "message": "Account provided is invalid",
+          "transactionId":""
+      }
+      ```
+
+       ###### Transaction Confirmation Request ######
+
+       To confirm the customer's has deposited funds into your merchant pay bill, Safaricom initiates this transaction through the service
+       to the confirmation url initially registered. This request may take time to arrive after sending the initial transaction request.
+
+        **Sample Confirmation Request**
+
+       ```
+       {
+         "transactionType": "Pay Bill",
+         "action": "confirmation",
+         "phone": "254706151592",
+         "firstName": "BEN",
+         "middleName": "MUUO",
+         "lastName": "",
+         "OrgAccountBalance": "1995.00",
+         "amount": "5.00",
+         "accountNumber": "HRE668807",
+         "transID": "MBQ9YFXP8E",
+         "time": "2018-02-26 20:46:39"
+       }
+
+        ```
+
+       **Sample Confirmation Response**
+
+        ```
+        {
+          "status": "00",
+          "message": "Success"
+        }
+        ```
+
+        The confirmation transaction indicates the customer has been charged successfully.
+
+
+
 
 > __NOTE: More daraja mpesa implementation will be included__
 

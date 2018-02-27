@@ -78,14 +78,16 @@ function sendCallbackMpesaTxnToAPIInitiator(txnDetails, req, res, next) {
  */
 function httpResponseBodyProcessor(responseData, req, res, next) {
     console.log('HttpResponseBodyProcessor: ' + JSON.stringify(responseData))
-    if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error) {
+    if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error && !isEmpty(responseData.body.status)) {
         console.log('POST Resp: ' + JSON.stringify(responseData.body))
+
+
         // Successful processing
         req.transactionResp = responseData.body
         next()
     } else {
         console.log('Error occurred: ' + JSON.stringify(responseData.body))
-        handleError(res, (responseData.body.errorMessage || responseData.body.fault.faultstring || responseData.error.getMessage()), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
+        return handleError(res, ('Invalid remote response'), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
     }
 }
 
@@ -124,9 +126,10 @@ function fetchLipaNaMpesaTransaction(keys, req, res, next) {
     })
 }
 
-function isEmpty(val){
+function isEmpty(val) {
     return (val === undefined || val == null || val.length <= 0)
 }
+
 // Export model
 module.exports = {
     isEmpty: isEmpty,

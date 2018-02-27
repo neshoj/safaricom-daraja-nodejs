@@ -21,7 +21,7 @@ var validateRequest = function (req, res, next) {
 
     //Package request
     var validationReq = {
-        transactionType: req.body.TransactionType,
+        transactionType: req.body.TransactionType || 'PAY BILL',
         action: VALIDATION_TRANSACTION_ACTION_TYPE,
         phone: req.body.MSISDN,
         firstName: req.body.FirstName,
@@ -37,13 +37,13 @@ var validateRequest = function (req, res, next) {
         'shortCode': req.body.BusinessShortCode
     }, function (err, remoteEndPoints) {
         // Invalid database response
-        if (!req.body)
-            mpesaFunctions.handleError(res, 'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered', GENERIC_SERVER_ERROR_CODE)
+        if (!req.body) return mpesaFunctions.handleError(res, 'Pay bill ' + req.body.BusinessShortCode + ' remote URLs not registered', GENERIC_SERVER_ERROR_CODE)
 
         // Short code remote end points not found
-        if (!remoteEndPoints)
-            mpesaFunctions.handleError(res, 'Remote end points for ' + req.body.BusinessShortCode + ' not found.', GENERIC_SERVER_ERROR_CODE)
+        if (!remoteEndPoints) return mpesaFunctions.handleError(res, 'Remote end points for ' + req.body.BusinessShortCode + ' not found.', GENERIC_SERVER_ERROR_CODE)
 
+
+        console.log('validation request %s', JSON.stringify(validationReq))
         //Forward to remote server
         mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
             url: remoteEndPoints.merchant.confirmation,

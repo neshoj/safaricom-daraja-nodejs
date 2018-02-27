@@ -42,9 +42,11 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
+
 // STK PUSH
 app.use('/stkpush', lipaNaMpesa)
 app.use('/stkpush/query', lipaNaMpesaQuery)
+
 //C2B CONFIRMATION & VALIDATION
 app.use('/c2b', c2b)
 app.use('/c2b/validate', c2bValidation)
