@@ -120,8 +120,8 @@ NodeJS based transaction processor middleware implementation for the [Daraja Saf
 
    ```
      "shortCode": "600169",
-     "confirmationURL": "https://api.binary.co.ke/v1/payBill/confirmation",
-     "validationURL": "https://api.binary.co.ke/v1/account/validation",
+     "confirmationURL": "https://localhost:3000/v1/payBill/confirmation",
+     "validationURL": "https://localhost:3000/v1/account/validation",
    ```
 
    To initiate this transaction, call a put request to the end point `http://localhost:3000/c2b/register/safaricom`.
