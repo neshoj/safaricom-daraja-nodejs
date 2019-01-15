@@ -1,16 +1,16 @@
-var express = require('express')
-var c2bRegistrationRouter = express.Router()
+let express = require('express')
+let c2bRegistrationRouter = express.Router()
 
-var auth = require('../../auth/auth')
-var mpesaFunctions = require('../../helpers/mpesaFunctions')
+let auth = require('../../auth/auth')
+let mpesaFunctions = require('../../helpers/mpesaFunctions')
 const GENERIC_SERVER_ERROR_CODE = '01'
 
 // Then load properties from a designated file.
-var properties = require('nconf')
+let properties = require('nconf')
 properties.file({file: 'config/properties.json'})
 
-var CallbackURLModel = require('./c2bCallbackUrlModel')
-var C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
+let CallbackURLModel = require('./c2bCallbackUrlModel')
+let C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
 
 /**
  * Save merchant call backs to database
@@ -18,11 +18,11 @@ var C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
  * @param res
  * @param next
  */
-function registerMerchantCallBackUrl(req, res, next) {
+let registerMerchantCallBackUrl = function(req, res, next) {
     if (mpesaFunctions.isEmpty(req.body)) return mpesaFunctions.handleError(res, 'Invalid request received', '01')
 
     // Check initial registration
-    var query = CallbackURLModel.findOne({
+    let query = CallbackURLModel.findOne({
         shortCode: req.body.shortCode
     })
 
@@ -32,7 +32,7 @@ function registerMerchantCallBackUrl(req, res, next) {
         if (err) return mpesaFunctions.handleError(res, 'Error fetching url registration object ' + err.message, GENERIC_SERVER_ERROR_CODE)
 
         //  New record
-        var newRecord = {
+        let newRecord = {
             shortCode: req.body.shortCode,
             merchant: {
                 confirmation: req.body.confirmationURL,
@@ -43,10 +43,10 @@ function registerMerchantCallBackUrl(req, res, next) {
         if (callbackURLs) {
             console.log('Updating C2B Urls to local database')
             //    Update record
-            var filter = {
+            let filter = {
                 'shortCode': req.body.shortCode
             }
-            var options = {multi: true}
+            let options = {multi: true}
             CallbackURLModel.update(filter, newRecord, options,
                 function (err) {
                     if (err) return mpesaFunctions.handleError(res, 'Unable to update transaction ' + err.message, GENERIC_SERVER_ERROR_CODE)
@@ -55,7 +55,7 @@ function registerMerchantCallBackUrl(req, res, next) {
                 })
         } else {
             console.log('Saving C2B Urls to local database')
-            var callbackUrl = new CallbackURLModel(
+            let callbackUrl = new CallbackURLModel(
                 newRecord
             )
             //  Save new record
@@ -75,9 +75,9 @@ function registerMerchantCallBackUrl(req, res, next) {
  * @param res
  * @param next
  */
-function registerAPICallBackUrl(req, res, next) {
+let registerAPICallBackUrl = function(req, res, next) {
     //    Prepare request object
-    var URLsRegistrationObject = {
+    let URLsRegistrationObject = {
         ValidationURL: properties.get('validationConfirm:validationURL'),
         ConfirmationURL: properties.get('validationConfirm:confirmationURL'),
         ResponseType: properties.get('validationConfirm:responseType'),
@@ -93,7 +93,7 @@ function registerAPICallBackUrl(req, res, next) {
 
 }
 
-function setServiceName(req, res, next) {
+let setServiceName = function(req, res, next) {
     req.body.service = C2B_URL_REGISTRATION_SERVICE_NAME
     next();
 }

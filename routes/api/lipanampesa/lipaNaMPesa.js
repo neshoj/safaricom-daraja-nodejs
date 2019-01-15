@@ -1,14 +1,14 @@
-var express = require('express')
-var stkPushRouter = express.Router()
-var moment = require('moment')
+let express = require('express')
+let stkPushRouter = express.Router()
+let moment = require('moment')
 
 // Lipa Na M-pesa model
-var LipaNaMpesa = require('./lipaNaMPesaTnxModel')
+let LipaNaMpesa = require('./lipaNaMPesaTnxModel')
 
-var auth = require('../../auth/auth')
-var mpesaFunctions = require('../../helpers/mpesaFunctions')
+let auth = require('../../auth/auth')
+let mpesaFunctions = require('../../helpers/mpesaFunctions')
 // Then load properties from a designated file.
-var properties = require('nconf')
+let properties = require('nconf')
 properties.file({file: 'config/properties.json'})
 
 const LIPA_NA_MPESA_SERVICE_NAME = 'STK-PUSH'
@@ -20,7 +20,7 @@ const GENERIC_SERVER_ERROR_CODE = '01'
  * @param res
  * @param next
  */
-var bootstrapRequest = function (req, res, next) {
+let bootstrapRequest = function (req, res, next) {
     req.body.service = LIPA_NA_MPESA_SERVICE_NAME
     var request = req.body
     /****************************
@@ -30,9 +30,9 @@ var bootstrapRequest = function (req, res, next) {
         mpesaFunctions.handleError(res, 'Invalid request received')
     }
 
-    var BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
-    var timeStamp = moment().format('YYYYMMDDHHmmss')
-    var rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
+    let BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
+    let timeStamp = moment().format('YYYYMMDDHHmmss')
+    let rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
     // Request object
     req.mpesaTransaction = {
         BusinessShortCode: BusinessShortCode,
@@ -54,7 +54,7 @@ var bootstrapRequest = function (req, res, next) {
 /**
  * Post transaction to Mpesa
  */
-function postTransaction(req, res, next) {
+let  postTransaction = function(req, res, next) {
     // Set url, AUTH token and transaction
     mpesaFunctions.sendMpesaTxnToSafaricomAPI({
         url: properties.get('lipaNaMpesa:processRequest'),
@@ -63,7 +63,7 @@ function postTransaction(req, res, next) {
     }, req, res, next)
 }
 
-function processResponse(req, res, next) {
+let  processResponse = function(req, res, next) {
     // Prepare external response message
     console.log('Process response')
     req.merchantMsg = {
@@ -73,7 +73,7 @@ function processResponse(req, res, next) {
         checkoutRequestId: req.transactionResp.CheckoutRequestID
     }
     // Prepare persistence object
-    var transaction = new LipaNaMpesa({
+    let transaction = new LipaNaMpesa({
         request: req.body,
         mpesaInitRequest: req.mpesaTransaction,
         mpesaInitResponse: req.transactionResp
@@ -83,7 +83,6 @@ function processResponse(req, res, next) {
             if (err) {
                 mpesaFunctions.handleError(res, 'Unable to persist lipa na mpesa transaction ' + err.message, GENERIC_SERVER_ERROR_CODE)
             } else {
-
                 next()
             }
         }
@@ -110,14 +109,14 @@ stkPushRouter.post('/process',
  * @param res
  * @param next
  */
-function fetchTransaction(req, res, next) {
+let  fetchTransaction = function(req, res, next) {
     console.log('Fetch initial transaction request...')
     // Check validity of message
     if (!req.body) {
         mpesaFunctions.handleError(res, 'Invalid message received')
     }
 
-    var query = LipaNaMpesa.findOne({
+    let query = LipaNaMpesa.findOne({
         'mpesaInitResponse.MerchantRequestID': req.body.Body.stkCallback.MerchantRequestID,
         'mpesaInitResponse.CheckoutRequestID': req.body.Body.stkCallback.CheckoutRequestID
     })
@@ -135,15 +134,15 @@ function fetchTransaction(req, res, next) {
     })
 }
 
-function updateTransaction(req, res, next) {
+let  updateTransaction = function(req, res, next) {
     console.log('update Transaction Callback...')
 
-    var conditions = {
+    let conditions = {
         'mpesaInitResponse.MerchantRequestID': req.body.Body.stkCallback.MerchantRequestID,
         'mpesaInitResponse.CheckoutRequestID': req.body.Body.stkCallback.CheckoutRequestID
     }
 
-    var options = {multi: true}
+    let options = {multi: true}
 
     // Set callback request to existing transaction
     req.lipaNaMPesaTransaction.mpesaCallback = req.body.Body
@@ -163,7 +162,7 @@ function updateTransaction(req, res, next) {
  * @param item
  * @returns {*}
  */
-function fetchMpesaReferenceNumber(item) {
+let  fetchMpesaReferenceNumber = function(item) {
     if (item) {
         if (item.length) {
             for (var i = 0; i < item.length; i++) if (item[i].Name === 'MpesaReceiptNumber') return item[i].Value
@@ -178,7 +177,7 @@ function fetchMpesaReferenceNumber(item) {
  * @param res
  * @param next
  */
-function forwardRequestToRemoteClient(req, res, next) {
+let  forwardRequestToRemoteClient = function(req, res, next) {
     console.log('Send request to originator..')
     // Forward request to remote server
     mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({

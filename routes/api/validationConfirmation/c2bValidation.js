@@ -1,10 +1,10 @@
-var express = require('express')
-var c2bValidationRouter = express.Router()
-var moment = require('moment')
+let express = require('express')
+let c2bValidationRouter = express.Router()
+let moment = require('moment')
 
-var mpesaFunctions = require('../../helpers/mpesaFunctions')
-var C2BTransaction = require('./c2bTransactionModel')
-var CallbackURLModel = require('./c2bCallbackUrlModel')
+let mpesaFunctions = require('../../helpers/mpesaFunctions')
+let C2BTransaction = require('./c2bTransactionModel')
+let CallbackURLModel = require('./c2bCallbackUrlModel')
 const GENERIC_SERVER_ERROR_CODE = '01'
 const VALIDATION_TRANSACTION_ACTION_TYPE = 'validate'
 
@@ -14,13 +14,13 @@ const VALIDATION_TRANSACTION_ACTION_TYPE = 'validate'
  * @param res
  * @param next
  */
-var validateRequest = function (req, res, next) {
+let validateRequest = function (req, res, next) {
     //Check request validity
     if (!req.body)
         mpesaFunctions.handleError(res, 'Invalid request received', GENERIC_SERVER_ERROR_CODE)
 
     //Package request
-    var validationReq = {
+    let validationReq = {
         transactionType: req.body.TransactionType || 'PAY BILL',
         action: VALIDATION_TRANSACTION_ACTION_TYPE,
         phone: req.body.MSISDN,
@@ -58,8 +58,8 @@ var validateRequest = function (req, res, next) {
  * @param res
  * @param next
  */
-var saveTransaction = function (req, res, next) {
-    var transaction = new C2BTransaction({
+let saveTransaction = function (req, res, next) {
+    let transaction = new C2BTransaction({
         validation: req.body,
         validationResult: req.transactionResp
     })
@@ -79,7 +79,7 @@ var saveTransaction = function (req, res, next) {
  * @param res
  * @param next
  */
-function processRemoteValidationResp(req, res, next) {
+let  processRemoteValidationResp = function(req, res, next) {
     //Check response validity
     if (!req.transactionResp) mpesaFunctions.handleError(req, 'Validating account reference request failed.', GENERIC_SERVER_ERROR_CODE)
 
@@ -98,6 +98,5 @@ c2bValidationRouter.post('/',
     function (req, res, next) {
         res.json(req.body.safaricomResp)
     })
-
 
 module.exports = c2bValidationRouter

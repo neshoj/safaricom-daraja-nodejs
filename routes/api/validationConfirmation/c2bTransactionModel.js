@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
-var c2bTransaction = new mongoose.Schema(
+let c2bTransaction = new mongoose.Schema(
     {
         status: String,
         validation: {
@@ -40,7 +40,7 @@ var c2bTransaction = new mongoose.Schema(
 )
 
 // Create a model based on the schema
-var transactionC2B = mongoose.model('c2bTxn', c2bTransaction)
+let transactionC2B = mongoose.model('c2bTxn', c2bTransaction)
 
 // Export model
 module.exports = transactionC2B

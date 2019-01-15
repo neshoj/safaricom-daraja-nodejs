@@ -1,16 +1,16 @@
-var express = require('express')
-var lipaNaMpesaQueryRouter = express.Router()
-var auth = require('../../auth/auth')
-var moment = require('moment')
+let express = require('express')
+let lipaNaMpesaQueryRouter = express.Router()
+let auth = require('../../auth/auth')
+let moment = require('moment')
 
-var mpesaFunctions = require('../../helpers/mpesaFunctions')
+let mpesaFunctions = require('../../helpers/mpesaFunctions')
 // Then load properties from a designated file.
-var properties = require('nconf')
+let properties = require('nconf')
 properties.file({file: 'config/properties.json'})
 
 const LIPA_NA_MPESA_SERVICE_NAME = 'STK-PUSH'
 
-function queryDBForRecord(req, res, next) {
+let  queryDBForRecord = function(req, res, next) {
     req.body.service = LIPA_NA_MPESA_SERVICE_NAME
     // Check validity of request
     if (!req.body) {
@@ -24,18 +24,17 @@ function queryDBForRecord(req, res, next) {
     }, req, res, next)
 }
 
-function confirmSourceOfTrnx(req, res, next) {
+let confirmSourceOfTrnx = function(req, res, next) {
     // If transaction is not found, query safaricom for result
-
     if (req.lipaNaMPesaTransaction) {
         req.tnxFoundLocally = true
         next()
     } else {
         console.log('Query safaricom')
         // Query
-        var BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
-        var timeStamp = moment().format('YYYYMMDDHHmmss')
-        var rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
+        let BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
+        let timeStamp = moment().format('YYYYMMDDHHmmss')
+        let rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
 
         req.mpesaTransaction = {
             BusinessShortCode: BusinessShortCode,
@@ -49,7 +48,7 @@ function confirmSourceOfTrnx(req, res, next) {
     }
 }
 
-function querySafaricomForRecord(req, res, next) {
+let querySafaricomForRecord = function(req, res, next) {
     // Set url, AUTH token and transaction
     mpesaFunctions.sendMpesaTxnToSafaricomAPI({
         url: properties.get('lipaNaMpesa:queryRequest'),
@@ -58,7 +57,7 @@ function querySafaricomForRecord(req, res, next) {
     }, req, res, next)
 }
 
-function result(req, res, next) {
+let result = function(req, res, next) {
     if (req.transactionResp) console.log(req.transactionResp)
 
     if (req.tnxFoundLocally) {

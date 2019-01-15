@@ -10,7 +10,7 @@ var tokenRepository = new mongoose.Schema(
 )
 
 // Create a model based on the schema
-var TokensModel = mongoose.model('tokens', tokenRepository)
+let TokensModel = mongoose.model('tokens', tokenRepository)
 
 // Export model
 module.exports = TokensModel

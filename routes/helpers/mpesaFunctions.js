@@ -1,7 +1,7 @@
-var request = require('request')
+let request = require('request')
 
 // Lipa Na M-pesa model
-var LipaNaMpesa = require('../api/lipanampesa/lipaNaMPesaTnxModel')
+let LipaNaMpesa = require('../api/lipanampesa/lipaNaMPesaTnxModel')
 
 const GENERIC_SERVER_ERROR_CODE = '01'
 
@@ -10,7 +10,7 @@ const GENERIC_SERVER_ERROR_CODE = '01'
  * @param message
  * @param next
  */
-function handleError(res, message, code) {
+let  handleError = function(res, message, code) {
 
     // Transaction failed
     res.send({
@@ -26,7 +26,7 @@ function handleError(res, message, code) {
  * @param res
  * @param next
  */
-function sendMpesaTxnToSafaricomAPI(txnDetails, req, res, next) {
+let sendMpesaTxnToSafaricomAPI = function(txnDetails, req, res, next) {
     request(
         {
             method: 'POST',
@@ -52,7 +52,7 @@ function sendMpesaTxnToSafaricomAPI(txnDetails, req, res, next) {
  * @param res
  * @param next
  */
-function sendCallbackMpesaTxnToAPIInitiator(txnDetails, req, res, next) {
+let sendCallbackMpesaTxnToAPIInitiator = function(txnDetails, req, res, next) {
     console.log('Requesting: ' + JSON.stringify(txnDetails))
     request(
         {
@@ -76,7 +76,7 @@ function sendCallbackMpesaTxnToAPIInitiator(txnDetails, req, res, next) {
  * @param res
  * @param next
  */
-function httpResponseBodyProcessor(responseData, req, res, next) {
+let httpResponseBodyProcessor = function(responseData, req, res, next) {
     console.log('HttpResponseBodyProcessor: ' + JSON.stringify(responseData))
     if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error && !isEmpty(responseData.body.status)) {
         console.log('POST Resp: ' + JSON.stringify(responseData.body))
@@ -97,14 +97,14 @@ function httpResponseBodyProcessor(responseData, req, res, next) {
  * @param res
  * @param next
  */
-function fetchLipaNaMpesaTransaction(keys, req, res, next) {
+let fetchLipaNaMpesaTransaction = function(keys, req, res, next) {
     console.log('Fetch initial transaction request...')
     // Check validity of message
     if (!req.body) {
         handleError(res, 'Invalid message received')
     }
 
-    var query = LipaNaMpesa.findOne({
+    let query = LipaNaMpesa.findOne({
         'mpesaInitResponse.MerchantRequestID': keys.MerchantRequestID,
         'mpesaInitResponse.CheckoutRequestID': keys.CheckoutRequestID
     })
@@ -126,7 +126,7 @@ function fetchLipaNaMpesaTransaction(keys, req, res, next) {
     })
 }
 
-function isEmpty(val) {
+let isEmpty = function(val) {
     return (val === undefined || val == null || val.length <= 0)
 }
 

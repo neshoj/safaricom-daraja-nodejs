@@ -1,10 +1,10 @@
-var express = require('express')
-var c2bConfirmationRouter = express.Router()
+let express = require('express')
+let c2bConfirmationRouter = express.Router()
 
-var mpesaFunctions = require('../../helpers/mpesaFunctions')
-var C2BTransaction = require('./c2bTransactionModel')
-var CallbackURLModel = require('./c2bCallbackUrlModel')
-var moment = require('moment')
+let mpesaFunctions = require('../../helpers/mpesaFunctions')
+let C2BTransaction = require('./c2bTransactionModel')
+let CallbackURLModel = require('./c2bCallbackUrlModel')
+let moment = require('moment')
 
 const GENERIC_SERVER_ERROR_CODE = '01'
 const CONFIRMATION_TRANSACTION_ACTION_TYPE = 'confirmation'
@@ -16,7 +16,7 @@ const CONFIRMATION_TRANSACTION_ACTION_TYPE = 'confirmation'
  * @param res
  * @param next
  */
-function findInitialTransaction(req, res, next) {
+let  findInitialTransaction = function(req, res, next) {
     //Invalid body request
     if (!req.body)
         mpesaFunctions.handleError(res, 'Invalid request received', GENERIC_SERVER_ERROR_CODE)
@@ -45,9 +45,9 @@ function findInitialTransaction(req, res, next) {
  * @param res
  * @param next
  */
-function sendRequestToRemoteApplication(req, res, next) {
+let  sendRequestToRemoteApplication = function(req, res, next) {
     //Prepare object
-    var confirmationReq = {
+    let confirmationReq = {
         transactionType: req.body.TransactionType,
         action: CONFIRMATION_TRANSACTION_ACTION_TYPE,
         phone: req.body.MSISDN,
@@ -86,9 +86,9 @@ function sendRequestToRemoteApplication(req, res, next) {
  * @param res
  * @param next
  */
-var saveTransaction = function (req, res, next) {
+let saveTransaction = function (req, res, next) {
 
-    var filter = {
+    let filter = {
         'validation.MSISDN': req.body.MSISDN,
         'validation.BillRefNumber': req.body.BillRefNumber,
         'validation.TransID': req.body.TransID

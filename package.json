@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "standard && node my-tests.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -20,8 +20,5 @@
   },
   "devDependencies": {
     "standard": "^10.0.3"
-  },
-  "scripts": {
-    "test": "standard && node my-tests.js"
   }
 }

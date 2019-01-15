@@ -1,21 +1,21 @@
-var moment = require('moment')
-var request = require('request')
+let moment = require('moment')
+let request = require('request')
 const STK_PUSH = 'STK-PUSH'
-var C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
-var TOKEN_INVALIDITY_WINDOW = 240
-var GENERIC_SERVER_ERROR_CODE = '01'
+let C2B_URL_REGISTRATION_SERVICE_NAME = 'C2B-URL-REGISTRATION'
+let TOKEN_INVALIDITY_WINDOW = 240
+let GENERIC_SERVER_ERROR_CODE = '01'
 
 // Authentication model
-var TokenModel = require('./tokenModel')
-var properties = require('nconf')
+let TokenModel = require('./tokenModel')
+let properties = require('nconf')
 
-var mpesaFunctions = require('../helpers/mpesaFunctions')
+let mpesaFunctions = require('../helpers/mpesaFunctions')
 // Then load properties from a designated file.
 properties.file({file: 'config/properties.json'})
 
-var fetchToken = function (req, res, next) {
+let fetchToken = function (req, res, next) {
     console.log('Fetching token')
-    var serviceName = req.body.service
+    let serviceName = req.body.service
     TokenModel.findOne({})
         .where('service').equals(serviceName)
         .exec(function (err, records) {
@@ -46,8 +46,8 @@ var fetchToken = function (req, res, next) {
  * Check token validity. Token validity window is set to 240 seconds
  * @param service tokenObject
  */
-var isTokenValid = function (service) {
-    var tokenAge = moment.duration(moment(new Date()).diff(service.lastUpdated)).asSeconds() + TOKEN_INVALIDITY_WINDOW
+let isTokenValid = function (service) {
+    let tokenAge = moment.duration(moment(new Date()).diff(service.lastUpdated)).asSeconds() + TOKEN_INVALIDITY_WINDOW
     return (tokenAge < service.timeout)
 }
 
@@ -59,11 +59,11 @@ var isTokenValid = function (service) {
  * @param newInstance
  * @param next
  */
-var setNewToken = function (req, res, serviceName, newInstance, next) {
-    var consumerKey = 'YOUR_APP_CONSUMER_KEY'
-    var consumerSecret = 'YOUR_APP_CONSUMER_SECRET'
-    var token = {}
-    var url = properties.get('auth:url')
+let setNewToken = function (req, res, serviceName, newInstance, next) {
+    let consumerKey = 'YOUR_APP_CONSUMER_KEY'
+    let consumerSecret = 'YOUR_APP_CONSUMER_SECRET'
+    let token = {}
+    let url = properties.get('auth:url')
     // Load consumer keys and secrets for each service
     switch (serviceName) {
         case STK_PUSH: {
@@ -78,16 +78,16 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
         }
     }
     // Combine consumer key with the secret
-    var auth = 'Basic ' + Buffer.from(consumerKey + ':' + consumerSecret).toString('base64')
+    let auth = 'Basic ' + Buffer.from(consumerKey + ':' + consumerSecret).toString('base64')
 
     request({url: url, headers: {'Authorization': auth}},
         function (error, response, body) {
             // Process successful token response
-            var tokenResp = JSON.parse(body)
+            let tokenResp = JSON.parse(body)
 
             // Check if response contains error
             if (!error || !tokenResp.errorCode) {
-                var newToken = {
+                let newToken = {
                     lastUpdated: moment().format('YYYY-MM-DD HH:mm:ss'),
                     accessToken: tokenResp.access_token,
                     timeout: tokenResp.expires_in,
@@ -110,8 +110,8 @@ var setNewToken = function (req, res, serviceName, newInstance, next) {
                     })
                 } else {
                     // Update existing access token
-                    var conditions = {service: serviceName}
-                    var options = {multi: true}
+                    let conditions = {service: serviceName}
+                    let options = {multi: true}
                     // Update existing token
                     TokenModel.update(conditions, newToken, options,
                         function (err, record) {

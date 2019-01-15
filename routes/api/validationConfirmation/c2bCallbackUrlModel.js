@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
-var callBackURLRepository = new mongoose.Schema(
+let callBackURLRepository = new mongoose.Schema(
     {
         shortCode: String,
         merchant: {
@@ -11,7 +11,7 @@ var callBackURLRepository = new mongoose.Schema(
 )
 
 // Create a model based on the schema
-var c2bCallbackURL = mongoose.model('c2bUrl', callBackURLRepository)
+let c2bCallbackURL = mongoose.model('c2bUrl', callBackURLRepository)
 
 // Export model
 module.exports = c2bCallbackURL
