@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b20b66d2-994f-4c09-ab1d-ee8b14e5d1bf" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b20b66d2-994f-4c09-ab1d-ee8b14e5d1bf" name="Default" comment="v1.0.0.1&#10;Feature: Upgraded to ECMA Script 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaQuery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/auth/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/auth/tokenModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth/tokenModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,37 +18,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="48" column="3" lean-forward="true" selection-start-line="48" selection-start-column="3" selection-end-line="48" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-49">
-              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+            <state relative-caret-position="646">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -70,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
+            <state relative-caret-position="1700">
               <caret line="100" selection-start-line="100" selection-end-line="100" />
             </state>
           </provider>
@@ -79,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-323">
+            <state relative-caret-position="340">
               <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
             </state>
           </provider>
@@ -88,8 +47,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1881">
-              <caret line="113" column="23" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="23" />
+            <state relative-caret-position="1921">
+              <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="194" column="29" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -106,17 +92,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="2176">
               <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -186,12 +172,10 @@
         <option value="$PROJECT_DIR$/routes/auth/authModel.js" />
         <option value="$PROJECT_DIR$/routes/api/api.js" />
         <option value="$PROJECT_DIR$/bin/www" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransaction.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/config/properties.json" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaQuery.js" />
         <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaTnxModel.js" />
         <option value="$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js" />
@@ -203,6 +187,8 @@
         <option value="$PROJECT_DIR$/routes/auth/tokenModel.js" />
         <option value="$PROJECT_DIR$/routes/helpers/mpesaFunctions.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js" />
       </list>
     </option>
   </component>
@@ -268,7 +254,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,58 +266,11 @@
               <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="lipanampesa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="validationConfirmation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="safaricom-daraja-nodejs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safaricom-daraja-nodejs" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -340,8 +278,9 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553155570492" />
     <property name="javascript.nodejs.core.library.configured.version" value="6.9.4" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/WebstormProjects/swipemonitorKCB" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -405,7 +344,8 @@
       <workItem from="1547361152537" duration="948000" />
       <workItem from="1547471848707" duration="598000" />
       <workItem from="1547494730449" duration="604000" />
-      <workItem from="1547498008340" duration="2071000" />
+      <workItem from="1547498008340" duration="2936000" />
+      <workItem from="1553074889769" duration="1114000" />
     </task>
     <task id="LOCAL-00001" summary="Changed readme">
       <created>1512331162958</created>
@@ -575,16 +515,23 @@
       <option name="project" value="LOCAL" />
       <updated>1513113465501</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="v1.0.0.1&#10;Feature: Upgraded to ECMA Script 6">
+      <created>1547534664304</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1547534664304</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130117000" />
+    <option name="totallyTimeSpent" value="132096000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4811321" visible="true" weight="0.20196672" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4811321" visible="true" weight="0.20131771" />
       <window_info id="Structure" order="1" weight="0.24962178" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -600,11 +547,11 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.58320725" side_tool="true" weight="0.7774141" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.3273906" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4612006" weight="0.3728278" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32733223" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.41679275" visible="true" weight="0.46153846" />
-      <window_info anchor="bottom" x="0" y="180" width="1366" height="377" id="Run" order="11" sideWeight="0.58320725" side_tool="true" weight="0.7774141" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.41581258" weight="0.23064771" />
+      <window_info active="true" anchor="bottom" x="0" y="180" width="1366" height="377" id="Run" order="11" sideWeight="0.5841874" side_tool="true" visible="true" weight="0.64296997" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -621,7 +568,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed readme" />
     <MESSAGE value="Switched from jade to handlebarsjs" />
     <MESSAGE value="added bootstrap4" />
     <MESSAGE value="Added mongodb to store access token&#10;Included property files for URLs &amp; consumer credential storage&#10;Set and refresh access token successfully" />
@@ -646,7 +592,8 @@
     <MESSAGE value="Initial process validation and confirmation requests" />
     <MESSAGE value="Saving validation request to db" />
     <MESSAGE value="Update readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update readme" />
+    <MESSAGE value="v1.0.0.1&#10;Feature: Upgraded to ECMA Script 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.0.0.1&#10;Feature: Upgraded to ECMA Script 6" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -689,20 +636,6 @@
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/response.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/query.js" />
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/javascript/nodejs/library/node-buffer-stub.js" />
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/properties.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -739,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-236">
-          <caret line="179" column="44" selection-start-line="179" selection-start-column="44" selection-end-line="179" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesaQuery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-170">
@@ -762,43 +688,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bCallbackUrlModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
+        <state relative-caret-position="221">
           <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bConfirmation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-49">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="1513">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bTransactionModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        <state relative-caret-position="646">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/c2bValidation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
+        <state relative-caret-position="1700">
           <caret line="100" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/validationConfirmation/urlRegistration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
+        <state relative-caret-position="340">
           <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/auth/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1881">
-          <caret line="113" column="23" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="23" />
+        <state relative-caret-position="1921">
+          <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -811,7 +737,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/helpers/mpesaFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
+        <state relative-caret-position="2176">
           <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
         </state>
       </provider>
@@ -819,7 +745,28 @@
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api/lipanampesa/lipaNaMPesa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="194" column="29" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="29" />
         </state>
       </provider>
     </entry>

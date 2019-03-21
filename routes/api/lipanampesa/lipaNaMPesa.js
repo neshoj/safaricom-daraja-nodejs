@@ -165,7 +165,7 @@ let  updateTransaction = function(req, res, next) {
 let  fetchMpesaReferenceNumber = function(item) {
     if (item) {
         if (item.length) {
-            for (var i = 0; i < item.length; i++) if (item[i].Name === 'MpesaReceiptNumber') return item[i].Value
+            for (let i = 0; i < item.length; i++) if (item[i].Name === 'MpesaReceiptNumber') return item[i].Value
         }
     }
     return ''
