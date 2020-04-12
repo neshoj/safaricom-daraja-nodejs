@@ -13,7 +13,7 @@
     "shortCode": "174379",
     "consumerKey": "H65FlGErvyuFvsajRekG9zcRdnQ30kHO",
     "consumerSecret": "2ARcZPg7Gc8gWFBd",
-    "callBackURL": "https://api.binary.co.ke/api/v1/lipaNaMpesaService/callback"
+    "callBackURL": "https://api.sample.co.ke/api/v1/lipaNaMpesaService/callback"
   },
   "validationConfirm": {
     "registerURLs": "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl",
@@ -21,7 +21,7 @@
     "consumerSecret": "PbhGFEm9Adu0VA7g",
     "shortCode": "600169",
     "confirmationURL": "https://api.binary.co.ke/v1/payBill/confirmation",
-    "validationURL": "https://api.binary.co.ke/v1/account/validation",
+    "validationURL": "https://api.sample.co.ke/v1/account/validation",
     "responseType": "Completed"
   }
 }

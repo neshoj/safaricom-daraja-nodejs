@@ -7,10 +7,11 @@ const GENERIC_SERVER_ERROR_CODE = '01'
 
 /**
  * Handle errors
+ * @param res
  * @param message
- * @param next
+ * @param code
  */
-let  handleError = function(res, message, code) {
+let handleError = function (res, message, code) {
 
     // Transaction failed
     res.send({
@@ -26,7 +27,7 @@ let  handleError = function(res, message, code) {
  * @param res
  * @param next
  */
-let sendMpesaTxnToSafaricomAPI = function(txnDetails, req, res, next) {
+let sendMpesaTxnToSafaricomAPI = function (txnDetails, req, res, next) {
     request(
         {
             method: 'POST',
@@ -52,7 +53,7 @@ let sendMpesaTxnToSafaricomAPI = function(txnDetails, req, res, next) {
  * @param res
  * @param next
  */
-let sendCallbackMpesaTxnToAPIInitiator = function(txnDetails, req, res, next) {
+let sendCallbackMpesaTxnToAPIInitiator = function (txnDetails, req, res, next) {
     console.log('Requesting: ' + JSON.stringify(txnDetails))
     request(
         {
@@ -76,15 +77,17 @@ let sendCallbackMpesaTxnToAPIInitiator = function(txnDetails, req, res, next) {
  * @param res
  * @param next
  */
-let httpResponseBodyProcessor = function(responseData, req, res, next) {
+let httpResponseBodyProcessor = function (responseData, req, res, next) {
     console.log('HttpResponseBodyProcessor: ' + JSON.stringify(responseData))
-    if (!responseData.body.fault && !responseData.body.errorCode && !responseData.error && !isEmpty(responseData.body.status)) {
-        console.log('POST Resp: ' + JSON.stringify(responseData.body))
-
-
-        // Successful processing
-        req.transactionResp = responseData.body
-        next()
+    if (responseData.body) {
+        if (responseData.body.ResponseCode === '0') {
+            console.log('POST Resp: ' + JSON.stringify(responseData.body))
+            // Successful processing
+            req.transactionResp = responseData.body
+            next()
+        } else {
+            return handleError(res, ('Invalid remote response'), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
+        }
     } else {
         console.log('Error occurred: ' + JSON.stringify(responseData.body))
         return handleError(res, ('Invalid remote response'), (responseData.body.errorCode || GENERIC_SERVER_ERROR_CODE))
@@ -96,8 +99,9 @@ let httpResponseBodyProcessor = function(responseData, req, res, next) {
  * @param req
  * @param res
  * @param next
+ * @param keys
  */
-let fetchLipaNaMpesaTransaction = function(keys, req, res, next) {
+let fetchLipaNaMpesaTransaction = function (keys, req, res, next) {
     console.log('Fetch initial transaction request...')
     // Check validity of message
     if (!req.body) {
@@ -110,7 +114,7 @@ let fetchLipaNaMpesaTransaction = function(keys, req, res, next) {
     })
 
     // execute the query at a later time
-    query.exec(function (err, lipaNaMPesaTransaction) {
+    let promise = query.exec(function (err, lipaNaMPesaTransaction) {
         // handle error
         if (err) {
             handleError(res, 'Lipa Mpesa transaction not found')
@@ -126,8 +130,8 @@ let fetchLipaNaMpesaTransaction = function(keys, req, res, next) {
     })
 }
 
-let isEmpty = function(val) {
-    return (val === undefined || val == null || val.length <= 0)
+let isEmpty = function (val) {
+    return (!(val !== undefined && val != null && val.length > 0))
 }
 
 // Export model

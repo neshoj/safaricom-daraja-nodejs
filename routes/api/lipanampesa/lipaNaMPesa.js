@@ -9,7 +9,7 @@ let auth = require('../../auth/auth')
 let mpesaFunctions = require('../../helpers/mpesaFunctions')
 // Then load properties from a designated file.
 let properties = require('nconf')
-properties.file({file: 'config/properties.json'})
+properties.file({ file: 'config/properties.json' })
 
 const LIPA_NA_MPESA_SERVICE_NAME = 'STK-PUSH'
 const GENERIC_SERVER_ERROR_CODE = '01'
@@ -23,38 +23,41 @@ const GENERIC_SERVER_ERROR_CODE = '01'
 let bootstrapRequest = function (req, res, next) {
     req.body.service = LIPA_NA_MPESA_SERVICE_NAME
     var request = req.body
+
+    console.log('===========',request.phoneNumber)
     /****************************
      {"amount":"5","phoneNumber":"2547******","callBackURL":"http://some-url","accountReference":"123456","description":"school fees"}
      *******************************/
     if (!(request.amount || request.phoneNumber || request.callBackURL || request.accountReference || request.description)) {
         mpesaFunctions.handleError(res, 'Invalid request received')
-    }
+    } else {
 
-    let BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
-    let timeStamp = moment().format('YYYYMMDDHHmmss')
-    let rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
-    // Request object
-    req.mpesaTransaction = {
-        BusinessShortCode: BusinessShortCode,
-        Password: Buffer.from(rawPass).toString('base64'),
-        Timestamp: timeStamp,
-        TransactionType: 'CustomerPayBillOnline',
-        Amount: request.amount,
-        PartyA: request.phoneNumber,
-        PartyB: BusinessShortCode,
-        PhoneNumber: request.phoneNumber,
-        CallBackURL: properties.get('lipaNaMpesa:callBackURL'),
-        AccountReference: request.accountReference,
-        TransactionDesc: request.description
+        let BusinessShortCode = properties.get('lipaNaMpesa:shortCode')
+        let timeStamp = moment().format('YYYYMMDDHHmmss')
+        let rawPass = BusinessShortCode + properties.get('lipaNaMpesa:key') + timeStamp
+        // Request object
+        req.mpesaTransaction = {
+            BusinessShortCode: BusinessShortCode,
+            Password: Buffer.from(rawPass).toString('base64'),
+            Timestamp: timeStamp,
+            TransactionType: 'CustomerPayBillOnline',
+            Amount: request.amount,
+            PartyA: request.phoneNumber,
+            PartyB: BusinessShortCode,
+            PhoneNumber: request.phoneNumber,
+            CallBackURL: properties.get('lipaNaMpesa:callBackURL'),
+            AccountReference: request.accountReference,
+            TransactionDesc: request.description
+        }
+        console.log(' POST Req: ' + JSON.stringify(req.mpesaTransaction))
+        next()
     }
-    console.log(' POST Req: ' + JSON.stringify(req.mpesaTransaction))
-    next()
 }
 
 /**
  * Post transaction to Mpesa
  */
-let  postTransaction = function(req, res, next) {
+let postTransaction = function (req, res, next) {
     // Set url, AUTH token and transaction
     mpesaFunctions.sendMpesaTxnToSafaricomAPI({
         url: properties.get('lipaNaMpesa:processRequest'),
@@ -63,7 +66,7 @@ let  postTransaction = function(req, res, next) {
     }, req, res, next)
 }
 
-let  processResponse = function(req, res, next) {
+let processResponse = function (req, res, next) {
     // Prepare external response message
     console.log('Process response')
     req.merchantMsg = {
@@ -80,12 +83,12 @@ let  processResponse = function(req, res, next) {
     })
     // Persist transaction object
     transaction.save(function (err) {
-            if (err) {
-                mpesaFunctions.handleError(res, 'Unable to persist lipa na mpesa transaction ' + err.message, GENERIC_SERVER_ERROR_CODE)
-            } else {
-                next()
-            }
+        if (err) {
+            mpesaFunctions.handleError(res, 'Unable to persist lipa na mpesa transaction ' + err.message, GENERIC_SERVER_ERROR_CODE)
+        } else {
+            next()
         }
+    }
     )
 }
 
@@ -98,7 +101,7 @@ stkPushRouter.post('/process',
     auth,
     postTransaction,
     processResponse,
-    function (req, res, next) {
+    function (req, res) {
         // Check processing status
         res.json(req.merchantMsg)
     })
@@ -109,7 +112,7 @@ stkPushRouter.post('/process',
  * @param res
  * @param next
  */
-let  fetchTransaction = function(req, res, next) {
+let fetchTransaction = function (req, res, next) {
     console.log('Fetch initial transaction request...')
     // Check validity of message
     if (!req.body) {
@@ -134,7 +137,7 @@ let  fetchTransaction = function(req, res, next) {
     })
 }
 
-let  updateTransaction = function(req, res, next) {
+let updateTransaction = function (req, res, next) {
     console.log('update Transaction Callback...')
 
     let conditions = {
@@ -142,7 +145,7 @@ let  updateTransaction = function(req, res, next) {
         'mpesaInitResponse.CheckoutRequestID': req.body.Body.stkCallback.CheckoutRequestID
     }
 
-    let options = {multi: true}
+    let options = { multi: true }
 
     // Set callback request to existing transaction
     req.lipaNaMPesaTransaction.mpesaCallback = req.body.Body
@@ -162,7 +165,7 @@ let  updateTransaction = function(req, res, next) {
  * @param item
  * @returns {*}
  */
-let  fetchMpesaReferenceNumber = function(item) {
+let fetchMpesaReferenceNumber = function (item) {
     if (item) {
         if (item.length) {
             for (let i = 0; i < item.length; i++) if (item[i].Name === 'MpesaReceiptNumber') return item[i].Value
@@ -177,7 +180,7 @@ let  fetchMpesaReferenceNumber = function(item) {
  * @param res
  * @param next
  */
-let  forwardRequestToRemoteClient = function(req, res, next) {
+let forwardRequestToRemoteClient = function (req, res, next) {
     console.log('Send request to originator..')
     // Forward request to remote server
     mpesaFunctions.sendCallbackMpesaTxnToAPIInitiator({
@@ -196,7 +199,7 @@ stkPushRouter.post('/callback',
     fetchTransaction,
     updateTransaction,
     forwardRequestToRemoteClient,
-    function (req, res, next) {
+    function (req, res) {
         res.json({
             ResultCode: 0,
             ResultDesc: 'The service request is processed successfully.'
