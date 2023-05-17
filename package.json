@@ -16,7 +16,7 @@
     "mongoose": "^5.7.5",
     "morgan": "~1.9.1",
     "nconf": "^0.11.4",
-    "request": "^2.83.0",
+    "request": "^2.88.2",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
